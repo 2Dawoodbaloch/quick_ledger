@@ -82,4 +82,9 @@ class GColors {
   static const Color incomeAccountBg = incomeBg;
   static const Color expenseAccountColor = expense;
   static const Color expenseAccountBg = expenseBg;
+
+    // Neutral Shades
+  static const Color black = Color(0xFF232323);
+  static const Color darkGrey = Color(0xFF939393);
+
 }

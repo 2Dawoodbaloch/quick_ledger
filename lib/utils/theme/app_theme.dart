@@ -22,8 +22,9 @@ class GAppTheme {
   GAppTheme._();
 
   static ThemeData lightTheme = ThemeData(
+    
     useMaterial3: true,
-    fontFamily: 'Inter', // swap for whatever font you add to pubspec
+    fontFamily: 'Nunito', 
     brightness: Brightness.light,
     primaryColor: GColors.primary,
     disabledColor: GColors.grey,
@@ -46,7 +47,7 @@ class GAppTheme {
 
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
-    fontFamily: 'Inter',
+    fontFamily: 'Nunito',
     brightness: Brightness.dark,
     primaryColor: GColors.primaryLight,
     disabledColor: GColors.textSecondaryDark,

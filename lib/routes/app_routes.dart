@@ -1,0 +1,15 @@
+
+
+import 'package:get/get.dart';
+import 'package:quick_ledger/features/authentication/screens/login/login.dart';
+import 'package:quick_ledger/routes/routes_name.dart';
+
+class AppRouter {
+  AppRouter._();
+
+  static final List<GetPage> pages = [
+    GetPage(name: RoutesName.login, page: () => const LoginScreen()),
+
+    
+  ];
+}

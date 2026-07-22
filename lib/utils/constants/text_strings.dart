@@ -4,9 +4,75 @@
 class GTexts {
   GTexts._();
 
+
+
+  // ============================================================
+  // LOGIN
+  // ============================================================
+  static const String welcomeBack = 'Welcome back';
+  static const String logInSubtitle = 'Log in to your ledger';
+  static const String email = 'Email';
+  static const String emailHint = 'you@company.com';
+  static const String password = 'Password';
+  static const String passwordHint = '••••••••';
+  static const String forgotPassword = 'Forgot password?';
+  static const String logIn = 'Log in';
+  static const String orContinueWith = 'or continue with';
+  static const String continueWithGoogle = 'Google';
+  static const String continueWithApple = 'Apple';
+  static const String rememberMe = "remember Me";
+  static const String dontHaveAccount = "Don't have an account?";
+  static const String signUp = 'Sign up';
+ 
+  // ============================================================
+  // SIGNUP
+  // ============================================================
+  static const String createYourAccount = 'Create your account';
+  static const String signUpSubtitle = 'Set up your ledger in a few steps';
+ 
+  // Personal details
+  static const String fullName = 'Full name';
+  static const String fullNameHint = 'Ahmed Raza';
+  static const String phoneNumber = 'Phone number';
+  static const String phoneNumberHint = '+92 300 1234567';
+ 
+  // Business details
+  static const String businessDetails = 'Business details';
+  static const String businessName = 'Business name';
+  static const String businessNameHint = 'Raza Traders';
+  static const String businessType = 'Business type';
+ 
+  // Business type options — kept as a list here; consider promoting
+  // to a BusinessType enum once this feeds real logic (e.g. choosing
+  // a starter Chart of Accounts template per business type)
+  static const List<String> businessTypeOptions = [
+    'Retail',
+    'Services',
+    'Manufacturing',
+    'Wholesale / trading',
+    'Other',
+  ];
+ 
+  static const String agreeToTerms =
+      'I agree to the Terms of service and Privacy policy';
+  static const String createAccount = 'Create account';
+  static const String alreadyHaveAccount = 'Already have an account?';
+ 
+  // ============================================================
+  // VALIDATION MESSAGES
+  // ============================================================
+  static const String fieldRequired = 'This field is required';
+  static const String invalidEmail = 'Enter a valid email address';
+  static const String invalidPhone = 'Enter a valid phone number';
+  static const String passwordTooShort =
+      'Password must be at least 8 characters';
+  static const String mustAgreeToTerms =
+      'You must agree to the terms to continue';
+
   // ============================================================
   // BOTTOM NAVIGATION
   // ============================================================
+
   static const String navHome = 'Home';
   static const String navJournals = 'Journals';
   static const String navReports = 'Reports';
@@ -73,7 +139,7 @@ class GTexts {
   static const String accountType = 'Type';
   static const String openingBalance = 'Opening balance';
   static const String description = 'Description (optional)';
-  static const String createAccount = 'Create account';
+  static const String createsAccount = 'Create account';
   static const String noAccountsYet = 'No accounts set up yet';
   static const String noAccountsSubtitle =
       'Set up a few basics to get started — cash, bank, and revenue cover most small businesses';

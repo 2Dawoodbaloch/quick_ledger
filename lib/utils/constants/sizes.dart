@@ -19,6 +19,7 @@ class GSizes {
   static const double defaultSpace = 16.0; // standard screen padding
   static const double spaceBtwItems = 8.0; // between list items, form fields
   static const double spaceBtwSections = 24.0; // between major page sections
+  static const double spaceBtwInputFields = 4.0;
 
   // ============================================================
   // BORDER RADIUS
@@ -57,6 +58,15 @@ class GSizes {
   static const double cardRadiusSm = 12.0;
   static const double cardRadiusLg = 16.0;
   static const double cardElevation = 0.0; // flat design per mockups
+
+
+  // ============================================================
+  // Container 
+  // ============================================================
+    static const double containerHeight = 50; // login image container
+    static const double  containerWidth = 50;
+
+
 
   // ============================================================
   // BOTTOM NAVIGATION

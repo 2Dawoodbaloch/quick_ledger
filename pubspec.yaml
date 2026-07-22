@@ -37,6 +37,8 @@ dependencies:
   iconsax: ^0.0.8
   get: ^4.7.3
   flutter_native_splash: ^2.4.8
+  get_storage: ^2.1.1
+  connectivity_plus: ^7.3.0
 
 dev_dependencies:
   flutter_test:

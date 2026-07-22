@@ -77,6 +77,7 @@ class GLoginForm extends StatelessWidget {
             child: OutlinedButton(
               onPressed: () {
                 // Get.to(SignUpScreen());
+                // Get.to(SignUpScreen());
               },
               child: Text(GTexts.createAccount),
             ),

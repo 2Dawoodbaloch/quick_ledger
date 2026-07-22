@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:quick_ledger/routes/app_routes.dart';
 import 'package:quick_ledger/routes/routes_name.dart';
@@ -20,7 +19,6 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: GAppTheme.lightTheme,
       darkTheme: GAppTheme.darkTheme,
-      initialRoute: RoutesName.login,
       getPages: AppRouter.pages,
     );
   }

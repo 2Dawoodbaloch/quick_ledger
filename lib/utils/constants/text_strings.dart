@@ -53,8 +53,9 @@ class GTexts {
     'Other',
   ];
  
-  static const String agreeToTerms =
-      'I agree to the Terms of service and Privacy policy';
+  static const String privacyPolicy = 'Privacy Policy';
+  static const String and = 'and';
+  static const String termsOfUse = 'Terms of use';
   static const String createAccount = 'Create account';
   static const String alreadyHaveAccount = 'Already have an account?';
  

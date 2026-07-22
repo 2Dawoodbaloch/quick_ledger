@@ -22,35 +22,33 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(GSizes.defaultSpace),
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: GSizes.containerHeight,
-                  width: GSizes.containerWidth,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: AssetImage(GImages.ledgerIcon)),
-                  ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: GSizes.containerHeight,
+                width: GSizes.containerWidth,
+                decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage(GImages.ledgerIcon)),
                 ),
-            
-                GLoginHeader(),
-            
-                SizedBox(height: GSizes.spaceBtwSections),
-            
-                // Form
-                GLoginForm(),
-                SizedBox(height: GSizes.spaceBtwSections),
-            
-                ///............ Divider ...............
-                GFormDivider(title: GTexts.orContinueWith),
-                SizedBox(height: GSizes.spaceBtwSections),
-            
-                /// social buttons
-                GSocialButtons(),
-              ],
-            ),
+              ),
+
+              GLoginHeader(),
+
+              SizedBox(height: GSizes.spaceBtwSections),
+
+              // Form
+              GLoginForm(),
+              SizedBox(height: GSizes.spaceBtwSections),
+
+              // ///............ Divider ...............
+              GFormDivider(title: GTexts.orContinueWith),
+              SizedBox(height: GSizes.spaceBtwSections),
+
+              /// social buttons
+              GSocialButtons(),
+            ],
           ),
         ),
       ),

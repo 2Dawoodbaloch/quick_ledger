@@ -3,8 +3,12 @@ class RoutesName {
  
   
   // login
-  static const String home = "/";
+  static const String navigationMenu = "/";
+
   static const String login = "/login Screen";
   // signup
   static const String signup = "/signup screen";
+
+  static const String home = "/home screen";
+
 }

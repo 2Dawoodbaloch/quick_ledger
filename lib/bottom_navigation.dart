@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:quick_ledger/features/ledger/screens/accounts/accounts.dart';
+import 'package:quick_ledger/features/ledger/screens/home/home.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/gernals.dart';
 import 'package:quick_ledger/features/ledger/screens/reports/reports.dart';
-import 'package:quick_ledger/home.dart';
 import 'package:quick_ledger/utils/constants/colors.dart';
 import 'package:quick_ledger/utils/helpers/helper_functions.dart';
 

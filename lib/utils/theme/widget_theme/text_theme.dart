@@ -118,8 +118,9 @@ class GTextTheme {
     ),
     bodySmall: const TextStyle().copyWith(
       fontSize: 12.0,
-      fontWeight: FontWeight.normal,
-      color: GColors.textSecondaryDark,
+      fontWeight: FontWeight.w500,
+      color: GColors.textPrimaryDark,
+
     ),
     labelLarge: const TextStyle().copyWith(
       fontSize: 12.0,

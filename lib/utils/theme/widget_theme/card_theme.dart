@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 
-/// Every row-style card across the app: transaction rows on Home,
-/// journal entry rows on Journals, account rows on Accounts, report
-/// summary cards on Reports. Flat design — no shadow, hairline border
-/// instead, matching the mockups.
 class GCardTheme {
   GCardTheme._();
 

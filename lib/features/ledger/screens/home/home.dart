@@ -20,13 +20,16 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("--------------------------------------------------------1");
     return Scaffold(
+      
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(GSizes.screenPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+            
                Obx(
                 () => GHomeHeader(
                   greeting: controller.greeting,

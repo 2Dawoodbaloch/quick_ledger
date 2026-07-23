@@ -20,6 +20,7 @@ class GSizes {
   static const double spaceBtwItems = 8.0; // between list items, form fields
   static const double spaceBtwSections = 24.0; // between major page sections
   static const double spaceBtwInputFields = 4.0;
+  static const double searchbarHeight = 40.0;
 
   // ============================================================
   // BORDER RADIUS

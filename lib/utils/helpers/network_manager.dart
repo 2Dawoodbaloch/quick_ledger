@@ -26,7 +26,7 @@ class NetworkManager extends GetxController {
   Future<void> _updateConnectionStatus(List<ConnectivityResult> result) async {
     _connectionStatus.value = result[0];
     if (_connectionStatus.value == ConnectivityResult.none) {
-      USnackBarHelpers.warningSnackBar(title: 'No Internet Connection');
+      GSnackBarHelpers.warningSnackBar(title: 'No Internet Connection');
     }
   }
 

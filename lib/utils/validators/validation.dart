@@ -1,6 +1,6 @@
 
 
-class UValidator {
+class GValidator {
 
 
   /// Empty Text Validation

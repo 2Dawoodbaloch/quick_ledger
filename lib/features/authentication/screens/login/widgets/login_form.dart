@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:quick_ledger/common/widgets/buttons/elevated_button.dart';
+import 'package:quick_ledger/features/authentication/controllers/login/login_controller.dart';
+import 'package:quick_ledger/features/authentication/screens/signup/signup.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/constants/text_strings.dart';
+import 'package:quick_ledger/utils/validators/validation.dart';
 
 // ignore: must_be_immutable
 class GLoginForm extends StatelessWidget {
@@ -13,7 +17,7 @@ class GLoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final controller = LoginController.instance;
+    final controller = LoginController.instance;
     return Form(
       // key: controller.loginFormKey,
       child: Column(
@@ -21,7 +25,7 @@ class GLoginForm extends StatelessWidget {
           /// email
           TextFormField(
             controller: email,
-            // validator: (value) => UValidator.validateEmail(value),
+            validator: (value) => GValidator.validateEmail(value),
             decoration: InputDecoration(
               prefixIcon: Icon(Iconsax.direct_right),
               labelText: GTexts.email,
@@ -32,21 +36,21 @@ class GLoginForm extends StatelessWidget {
           /// password
           TextFormField(
             controller: password,
-            // validator: (value) =>
-            //     UValidator.validateEmptyText('Password', value),
-            // obscureText: controller.isPasswordVisible.value,
+            validator: (value) =>
+                GValidator.validateEmptyText('Password', value),
+            obscureText: controller.isPasswordVisible.value,
             decoration: InputDecoration(
               prefixIcon: Icon(Iconsax.lock),
 
               suffixIcon: IconButton(
                 icon: Icon(
-                  // controller.isPasswordVisible.value
-                  //     ? Iconsax.eye_slash
-                  //     : Iconsax.eye,
-                  Iconsax.eye_slash,
+                  controller.isPasswordVisible.value
+                      ? Iconsax.eye_slash
+                      : Iconsax.eye,
+               
                 ),
                 onPressed: () {
-                  // controller.isPasswordVisible.toggle();
+                  controller.isPasswordVisible.toggle();
                 },
               ),
             ),
@@ -65,8 +69,8 @@ class GLoginForm extends StatelessWidget {
 
           /// sign In
           GElevatedButton(
-            // onPressed: controller.loginWithEMailAndPassword,
-            onPressed: () {},
+            onPressed: controller.loginWithEMailAndPassword,
+     
             child: Text(GTexts.logIn),
           ),
           SizedBox(height: GSizes.spaceBtwItems / 2),
@@ -76,8 +80,7 @@ class GLoginForm extends StatelessWidget {
             width: double.infinity,
             child: OutlinedButton(
               onPressed: () {
-                // Get.to(SignUpScreen());
-                // Get.to(SignUpScreen());
+                Get.to(SignUpScreen());
               },
               child: Text(GTexts.createAccount),
             ),

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../common/widgets/loaders/animation_loader.dart';
 import '../constants/colors.dart';
 import '../helpers/helper_functions.dart';
 
-class UFullScreenLoader {
+class GFullScreenLoader {
   static void openLoadingDialog(String text) {
     showDialog(
       context: Get.overlayContext!,
@@ -12,9 +11,9 @@ class UFullScreenLoader {
       builder: (_) => PopScope(
         canPop: false,
         child: Container(
-          color: UHelperFunctions.isDarkMode(Get.context!)
-              ? UColors.dark
-              : UColors.white,
+          color: GHelperFunctions.isDarkMode(Get.context!)
+              ? GColors.dark
+              : GColors.white,
           width: double.infinity,
           height: double.infinity,
           child: Column(
@@ -23,7 +22,7 @@ class UFullScreenLoader {
               const SizedBox(height: 250),
 
               /// Animation
-              UAnimationLoader(text: text),
+              Text(text)
             ],
           ),
         ),
@@ -31,7 +30,7 @@ class UFullScreenLoader {
     );
   }
 
-  static stopLoading() {
+  static void stopLoading() {
     Navigator.of(Get.overlayContext!).pop();
   }
 }

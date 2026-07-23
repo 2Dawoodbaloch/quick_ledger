@@ -20,7 +20,9 @@ class GColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color light = Color(0xFFF5F6FA); // scaffold background, light mode
   static const Color dark = Color(0xFF1A1A1A); // primary text, light mode
-  static const Color grey = Color(0xFF888780); // secondary/muted text, light mode
+  static const Color darkerGrey = Color(0xFF4F4F4F);
+  static const Color darkGrey = Color(0xFF939393);
+  static const Color grey = Color(0xFFE0E0E0);
   static const Color lightGrey = Color(0xFFE3E2DC); // borders, dividers, light mode
   static const Color cardLight = Color(0xFFFFFFFF); // card surface, light mode
 
@@ -82,9 +84,5 @@ class GColors {
   static const Color incomeAccountBg = incomeBg;
   static const Color expenseAccountColor = expense;
   static const Color expenseAccountBg = expenseBg;
-
-    // Neutral Shades
-  static const Color black = Color(0xFF232323);
-  static const Color darkGrey = Color(0xFF939393);
 
 }

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
-import 'package:quick_ledger/bottom_navigation.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -9,9 +7,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: IconButton(onPressed: (){
-          Get.to(NavigationMenu());
-        }, icon: Icon(Icons.cloud_circle)),
+        child: Text("Home"),
       ),
     );
   }

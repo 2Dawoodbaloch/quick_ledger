@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quick_ledger/bindings/navigation_binding.dart';
 import 'package:quick_ledger/routes/app_routes.dart';
-import 'package:quick_ledger/routes/routes_name.dart';
 import 'package:quick_ledger/utils/theme/app_theme.dart';
 
 void main() {
@@ -19,7 +19,9 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: GAppTheme.lightTheme,
       darkTheme: GAppTheme.darkTheme,
+      initialBinding: NavigationBinding(),
       getPages: AppRouter.pages,
+
     );
   }
 }

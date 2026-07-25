@@ -9,6 +9,9 @@ class GTextFormFieldTheme {
   GTextFormFieldTheme._();
 
   static InputDecorationTheme lightInputDecorationTheme = InputDecorationTheme(
+      // Add these
+  filled: true,
+  fillColor: GColors.white,
     errorMaxLines: 3,
     prefixIconColor: GColors.grey,
     suffixIconColor: GColors.grey,
@@ -16,8 +19,8 @@ class GTextFormFieldTheme {
       horizontal: GSizes.md,
       vertical: 12,
     ),
-    labelStyle: const TextStyle(fontSize: 12.0, color: GColors.grey),
-    hintStyle: const TextStyle(fontSize: 13.0, color: GColors.grey),
+    labelStyle: const TextStyle(fontSize: 12.0, color: GColors.dark),
+    hintStyle: const TextStyle(fontSize: 13.0, color: GColors.darkGrey),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(GSizes.inputFieldRadius),
       borderSide: const BorderSide(color: GColors.lightGrey),

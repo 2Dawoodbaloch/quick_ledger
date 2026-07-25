@@ -28,6 +28,7 @@ class GSnackBarHelpers {
 
 
   /// Warning Orange Snack bar
+  // ignore: strict_top_level_inference
   static void warningSnackBar({required title, message = ''}) {
     Get.snackbar(title, message,
         isDismissible: true,

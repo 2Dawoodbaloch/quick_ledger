@@ -20,7 +20,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("--------------------------------------------------------1");
     return Scaffold(
       
       body: SafeArea(
@@ -36,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                   userName: controller.userName.value,
                   subtitle: GTexts.ledgerOverview,
                   onAvatarTap: () {
-                    // TODO: navigate to profile/settings
+                   
                   },
                 ),
               ),
@@ -75,14 +74,14 @@ class HomeScreen extends StatelessWidget {
                     subtitle: GTexts.noTransactionsSubtitle,
                     buttonLabel: '+ ${GTexts.newJournalEntry}',
                     onButtonTap: () {
-                      // TODO: navigate to new journal entry screen
+                     
                     },
                   );
                 }
                 return GRecentTransactionsList(
                   transactions: controller.recentTransactions,
                   onTransactionTap: (transaction) {
-                    // TODO: navigate to journal entry detail for this transaction
+                 
                   },
                 );
               }),

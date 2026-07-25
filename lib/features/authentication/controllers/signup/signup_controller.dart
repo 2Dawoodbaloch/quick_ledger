@@ -5,6 +5,7 @@ import 'package:quick_ledger/utils/popups/full_screen_loader.dart';
 import 'package:quick_ledger/utils/popups/snackbar_helpers.dart';
 
 class SignupController extends GetxController {
+  // ignore: non_constant_identifier_names
   static SignupController get Instance => Get.find();
 
   // Varibale
@@ -50,7 +51,7 @@ class SignupController extends GetxController {
         GFullScreenLoader.stopLoading(); // ✅ close dialog
         return;
       }
-      ;
+      
 
       // Resgister user using firebase
       // UserCredential userCredential = await _authRepository.registerUser(
@@ -78,14 +79,12 @@ class SignupController extends GetxController {
         title: 'Congratulation!',
         message: 'Your account has been created! Verfiy email to continue',
       );
-      print('successful');
       // stop loading
       GFullScreenLoader.stopLoading();
 
       // redirect to verify email screen
       // Get.to(() => VerifyEmailScreen(email: email.text));
     } catch (e) {
-      print("❌ Signup error: $e");
       GFullScreenLoader.stopLoading();
       GSnackBarHelpers.errorSnackBar(title: 'Error', message: e.toString());
     }

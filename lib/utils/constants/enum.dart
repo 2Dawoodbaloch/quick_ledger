@@ -19,6 +19,35 @@ extension JournalStatusX on JournalStatus {
   }
 }
 
+enum AccountType {
+  asset,
+  liability,
+  equity,
+  income,
+  expense,
+}
+
+extension AccountTypeExtension on AccountType {
+  String get label {
+    switch (this) {
+      case AccountType.asset:
+        return 'Asset';
+
+      case AccountType.liability:
+        return 'Liability';
+
+      case AccountType.equity:
+        return 'Equity';
+
+      case AccountType.income:
+        return 'Income';
+
+      case AccountType.expense:
+        return 'Expense';
+    }
+  }
+}
+
 extension JournalTypeX on JournalType {
   String get label {
     switch (this) {

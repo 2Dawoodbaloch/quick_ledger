@@ -15,6 +15,7 @@ class GChipTheme {
   GChipTheme._();
 
   static final lightChipTheme = ChipThemeData(
+    backgroundColor: GColors.white,
     disabledColor: GColors.lightGrey,
     labelStyle: const TextStyle(fontSize: 11.0, color: GColors.dark),
     selectedColor: GColors.dark,
@@ -27,6 +28,7 @@ class GChipTheme {
   );
 
   static final darkChipTheme = ChipThemeData(
+    backgroundColor: GColors.dark,
     disabledColor: GColors.borderDark,
     labelStyle: const TextStyle(fontSize: 11.0, color: GColors.textPrimaryDark),
     selectedColor: GColors.textPrimaryDark,

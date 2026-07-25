@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:quick_ledger/utils/constants/colors.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/constants/text_strings.dart';
+import 'package:quick_ledger/utils/helpers/helper_functions.dart';
 
-/// The filter chip row on the Journals screen: All / Sales / Purchase
-/// / Bank / Cash. `null` in JournalType? represents "All".
 class GJournalFilterChips extends StatelessWidget {
   const GJournalFilterChips({
     super.key,
@@ -13,7 +13,7 @@ class GJournalFilterChips extends StatelessWidget {
   });
 
   final JournalType? selected;
-  final void Function(JournalType? type) onSelect;
+  final void Function(JournalType? type)? onSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +35,26 @@ class GJournalFilterChips extends StatelessWidget {
     );
   }
 
-  Widget _chip(BuildContext context, {required String label, required JournalType? value}) {
+  Widget _chip(
+    BuildContext context, {
+    required String label,
+    required JournalType? value,
+  }) {
     final isSelected = selected == value;
+    final dark = GHelperFunctions.isDarkMode(context);
+
     return ChoiceChip(
-      label: Text(label),
+      label: Text(
+        label,
+        style: Theme.of(context).chipTheme.labelStyle?.copyWith(
+              color: isSelected
+                  ? (dark ? GColors.dark : GColors.white)
+                  : null,
+            ),
+      ),
       selected: isSelected,
-      onSelected: (_) => onSelect(value),
-      // Color/shape/padding come from GChipTheme automatically —
-      // only `selected` (structural state) is set here.
+      showCheckmark: false,
+      onSelected: onSelect == null ? null : (_) => onSelect!(value),
     );
   }
 }

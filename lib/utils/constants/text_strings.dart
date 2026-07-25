@@ -116,7 +116,7 @@ class GTexts {
   // ============================================================
   // JOURNAL ENTRY FORM
   // ============================================================
-  static const String journal = 'Journal';
+  static const String journalEntry = 'New journal entry';
   static const String reference = 'Reference';
   static const String date = 'Date';
   static const String narration = 'Narration';

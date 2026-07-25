@@ -18,16 +18,16 @@ class GJournalFilterChips extends StatelessWidget {
       spacing: 8,
       children: [
         GChoiceChip(
-          text: "All",
+
           selected: selected == null,
-          onSelected: (_) => onSelect(null),
+          onSelected: (_) => onSelect(null), label: 'All',
         ),
 
         ...JournalType.values.map(
           (type) => GChoiceChip(
-            text: type.label,
+      
             selected: selected == type,
-            onSelected: (_) => onSelect(type),
+            onSelected: (_) => onSelect(type), label: type.label,
           ),
         ),
       ],

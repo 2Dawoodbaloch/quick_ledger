@@ -1,46 +1,75 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:quick_ledger/utils/constants/text_strings.dart';
-import 'package:quick_ledger/utils/helpers/helper_functions.dart';
 
-import '../../../utils/constants/colors.dart';
-import '../../../utils/constants/sizes.dart';
+/// Reusable search field with a search icon (prefix) and a clear
+/// button (suffix) that only appears once text is typed.
+///
+/// IMPORTANT: this uses TextField's built-in `suffixIcon` slot for
+/// the clear button — NOT a Positioned/Stack overlay. Positioned
+/// widgets only work as a direct child of a Stack; if you (or an
+/// earlier version of this widget) wrapped the field in a Column and
+/// tried to Positioned() a button on top of it, that's exactly the
+/// "Incorrect use of ParentDataWidget" crash you hit. suffixIcon
+/// avoids the problem entirely since TextField handles the layout
+/// for you.
+class GSearchBar extends StatefulWidget {
+  const GSearchBar({
+    super.key,
+    this.hintText = 'Search',
+    this.onChanged,
+    this.enabled = true,
+  });
 
-class GSearchBar extends StatelessWidget {
-  const GSearchBar({super.key});
+  final String hintText;
+  final ValueChanged<String>? onChanged;
+  final bool enabled;
+
+  @override
+  State<GSearchBar> createState() => _GSearchBarState();
+}
+
+class _GSearchBarState extends State<GSearchBar> {
+  final _controller = TextEditingController();
+  bool _hasText = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      final hasText = _controller.text.isNotEmpty;
+      if (hasText != _hasText) {
+        setState(() => _hasText = hasText);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _clear() {
+    _controller.clear();
+    widget.onChanged?.call('');
+  }
 
   @override
   Widget build(BuildContext context) {
-    bool dark = GHelperFunctions.isDarkMode(context);
-
-    return Positioned(
-      bottom: 0,
-      right: GSizes.spaceBtwSections,
-      left: GSizes.spaceBtwSections,
-      child: GestureDetector(
-        onTap: () {},
-        child: Hero(
-          tag: 'search_animation',
-          child: Container(
-            height: GSizes.searchbarHeight,
-            padding: const EdgeInsets.symmetric(horizontal: GSizes.md),
-            decoration: BoxDecoration(
-              color: dark ? GColors.dark : Colors.white,
-              borderRadius: BorderRadius.circular(GSizes.buttonRadius),
-              border: Border.all(color: Colors.grey.shade300, width: 1),
-            ),
-            child: Row(
-              children: [
-                const Icon(Icons.search, color: GColors.darkGrey),
-                const SizedBox(width: GSizes.spaceBtwItems),
-                Text(
-                  GTexts.searchJournalEntries,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ],
-            ),
-          ),
-        ),
+    return TextField(
+      controller: _controller,
+      enabled: widget.enabled,
+      onChanged: widget.onChanged,
+      decoration: InputDecoration(
+        hintText: widget.hintText,
+        prefixIcon: const Icon(Icons.search),
+        // This is the fix: suffixIcon is a normal, supported slot on
+        // TextField — no Positioned/Stack needed at all.
+        suffixIcon: _hasText
+            ? IconButton(
+                icon: const Icon(Icons.close, size: 18),
+                onPressed: _clear,
+              )
+            : null,
       ),
     );
   }

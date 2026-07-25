@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:quick_ledger/bindings/navigation_binding.dart';
+import 'package:quick_ledger/bindings/new_account_screen_binding.dart';
+import 'package:quick_ledger/bindings/new_journal_entry_binding.dart';
 import 'package:quick_ledger/bottom_navigation.dart';
 import 'package:quick_ledger/features/authentication/screens/login/login.dart';
 import 'package:quick_ledger/features/authentication/screens/signup/signup.dart';
@@ -32,9 +34,10 @@ class AppRouter {
     GetPage(
       name: RoutesName.newJournalEntry,
       page: () => NewJournalEntryScreen(),
+      binding: NewJournalEntryBinding()
     ),
 
     GetPage(name: RoutesName.accounts, page: () => AccountsScreen()),
-    GetPage(name: RoutesName.newAccounts, page: () => NewAccountScreen())
+    GetPage(name: RoutesName.newAccounts, page: () => NewAccountScreen(),binding: NewAccountBinding())
   ];
 }

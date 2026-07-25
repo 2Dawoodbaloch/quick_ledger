@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quick_ledger/features/ledger/controllers/model/home/transactions_model.dart';
+import 'package:quick_ledger/features/ledger/model/home/transactions_model.dart';
 import 'package:quick_ledger/utils/constants/colors.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/helpers/helper_functions.dart';

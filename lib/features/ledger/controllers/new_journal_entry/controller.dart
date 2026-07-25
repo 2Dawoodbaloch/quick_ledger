@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
-import 'package:quick_ledger/features/ledger/controllers/model/new_journal_entry/journal_entries_model.dart';
-import 'package:quick_ledger/features/ledger/controllers/model/new_journal_entry/journal_line_model.dart';
+import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_entries_model.dart';
+import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_line_model.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
 
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quick_ledger/features/ledger/controllers/model/new_journal_entry/journal_entries_model.dart';
+import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_entries_model.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/widgets/status_pill.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';

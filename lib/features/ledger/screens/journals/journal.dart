@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:quick_ledger/common/widgets/screens/empty_state.dart';
 import 'package:quick_ledger/common/widgets/text_fields/search_bar.dart';
 import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
-import 'package:quick_ledger/features/ledger/controllers/model/journal/widget/journal_filter_chips.dart';
+import 'package:quick_ledger/features/ledger/model/journal/widget/journal_filter_chips.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/new_journal_entry.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/widget/journal_entry_list.dart';
+import 'package:quick_ledger/routes/routes_name.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/constants/text_strings.dart';
 
@@ -25,7 +26,6 @@ class JournalsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(GSizes.defaultSpace),
@@ -40,21 +40,19 @@ class JournalsScreen extends StatelessWidget {
             // Search bar and filter chips are dimmed (not removed)
             // when there's nothing to search/filter yet — same
             // pattern used in the empty-state mockup.
-            Obx(() {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  GSearchBar(),
-                  const SizedBox(height: GSizes.spaceBtwItems),
-                  Obx(
-                    () => GJournalFilterChips(
-                      selected: controller.selectedFilter.value,
-                      onSelect: controller.setFilter,
-                    ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GSearchBar(),
+                const SizedBox(height: GSizes.spaceBtwItems),
+                Obx(
+                  () => GJournalFilterChips(
+                    selected: controller.selectedFilter.value,
+                    onSelect: controller.setFilter,
                   ),
-                ],
-              );
-            }),
+                ),
+              ],
+            ),
 
             const SizedBox(height: GSizes.spaceBtwSections),
 
@@ -81,9 +79,7 @@ class JournalsScreen extends StatelessWidget {
                 // work, since that getter already applies both.
                 return GJournalEntryList(
                   entries: controller.filteredEntries,
-                  onEntryTap: (entry) {
-      
-                  },
+                  onEntryTap: (entry) {},
                 );
               }),
             ),
@@ -160,7 +156,7 @@ class JournalsScreen extends StatelessWidget {
 //                       subtitle: GTexts.noJournalEntriesSubtitle,
 //                       buttonLabel: '+ ${GTexts.newJournalEntry}',
 //                       onButtonTap: () {
-//                    
+//
 //                         Get.to(() => NewJournalEntryScreen());
 //                       },
 //                     ),

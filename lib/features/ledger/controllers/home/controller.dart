@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:quick_ledger/features/ledger/controllers/model/home/transactions_model.dart';
+import 'package:quick_ledger/features/ledger/model/home/transactions_model.dart';
 
 class HomeController extends GetxController {
   static HomeController get instance => Get.find();

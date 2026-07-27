@@ -7,13 +7,13 @@ import 'package:quick_ledger/utils/helpers/helper_functions.dart';
 class GBalanceCard extends StatelessWidget {
   const GBalanceCard({
     super.key,
-    required this.netAssets,
+    required this.availableBalance,
     required this.cashTotal,
     required this.bankTotal,
     required this.reievable
   });
 
-  final String netAssets;
+  final String availableBalance;
 
   final String reievable;
 
@@ -55,7 +55,7 @@ class GBalanceCard extends StatelessWidget {
           const SizedBox(height: GSizes.xs),
 
           Text(
-            netAssets,
+            '${availableBalance }RS',
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -65,19 +65,19 @@ class GBalanceCard extends StatelessWidget {
 
           GBalanceSection(
             title: 'Cash',
-            total: cashTotal,
+            total:  '${cashTotal}RS',
           ),
 
           /// Bank
 
           GBalanceSection(
             title: 'Bank',
-            total: bankTotal,
+            total: '${bankTotal }RS',
   
           ),
            GBalanceSection(
             title: 'Recievable',
-            total: reievable
+            total:  '${reievable }RS',
   
           ),
         ],

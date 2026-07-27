@@ -25,7 +25,21 @@ class AccountController extends GetxController {
     return groups;
   }
 
-  void addAccount(AccountModel account) => allAccounts.add(account);
+  void addAccount(AccountModel account) {
+    allAccounts.add(account);
+    print("========== ALL ACCOUNTS ==========");
+
+    for (final a in allAccounts) {
+      print(
+        "Name: ${a.name} | "
+        "Type: ${a.type} | "
+        "Category: ${a.category} | "
+        "Balance: ${a.balance}",
+      );
+    }
+
+    print("==================================");
+  }
 
   // ============================================================
   // CATEGORY TOTALS — what Home's balance breakdown actually needs
@@ -36,6 +50,16 @@ class AccountController extends GetxController {
         .where((a) => a.category == category)
         .fold(0.0, (sum, a) => sum + a.balance);
   }
+
+  List<AccountModel> get cashAccounts =>
+      allAccounts.where((a) => a.category == AccountCategory.cash).toList();
+
+  List<AccountModel> get bankAccounts =>
+      allAccounts.where((a) => a.category == AccountCategory.bank).toList();
+
+  List<AccountModel> get receivableAccounts => allAccounts
+      .where((a) => a.category == AccountCategory.receivable)
+      .toList();
 
   double get totalCash => _totalForCategory(AccountCategory.cash);
   double get totalBank => _totalForCategory(AccountCategory.bank);

@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
-import 'package:quick_ledger/features/ledger/model/home/balance_account_model.dart';
 import 'package:quick_ledger/features/ledger/model/home/transactions_model.dart';
 
 class HomeController extends GetxController {
@@ -17,21 +16,22 @@ class HomeController extends GetxController {
   }
 
   double get availableBalance => AccountController.instance.availableBalance;
+  double get cashTotal => AccountController.instance.totalCash;
+  double get cashRecievable => AccountController.instance.totalReceivable;
+  double get bankTotal => AccountController.instance.totalBank;
 
-  // final currentBalance = '\$25,420'.obs;
-  final cashTotal = '\$4,000'.obs;
-  final cashRecievable = '\$96,000'.obs;
-  final bankTotal = '\$21,420'.obs;
 
-  final cashAccounts = <BalanceAccountModel>[
-    BalanceAccountModel(name: 'Cash in Hand', amount: 4444.0),
-    BalanceAccountModel(name: 'Petty Cash', amount: 5500.0),
-  ].obs;
 
-  final bankAccounts = <BalanceAccountModel>[
-    BalanceAccountModel(name: 'Meezan Bank', amount: 3000.0),
-    BalanceAccountModel(name: 'HBL Current', amount: 2200.0),
-  ].obs;
+
+  // final cashAccounts = <BalanceAccountModel>[
+  //   BalanceAccountModel(name: 'Cash in Hand', amount: 4444.0),
+  //   BalanceAccountModel(name: 'Petty Cash', amount: 5500.0),
+  // ].obs;
+
+  // final bankAccounts = <BalanceAccountModel>[
+  //   BalanceAccountModel(name: 'Meezan Bank', amount: 3000.0),
+  //   BalanceAccountModel(name: 'HBL Current', amount: 2200.0),
+  // ].obs;
 
   // ---- Balance card ----
   // final RxDouble currentBalance = 25420.0.obs;

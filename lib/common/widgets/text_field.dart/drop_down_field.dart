@@ -22,6 +22,7 @@ class GDropdownField<T> extends StatelessWidget {
       children: [
         GFieldLabel(label),
         DropdownButtonFormField<T>(
+         
           initialValue: value,
           items: items,
           onChanged: onChanged,

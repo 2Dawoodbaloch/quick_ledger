@@ -26,4 +26,35 @@ class AccountController extends GetxController {
   }
 
   void addAccount(AccountModel account) => allAccounts.add(account);
+
+  // ============================================================
+  // CATEGORY TOTALS — what Home's balance breakdown actually needs
+  // ============================================================
+
+  double _totalForCategory(AccountCategory category) {
+    return allAccounts
+        .where((a) => a.category == category)
+        .fold(0.0, (sum, a) => sum + a.balance);
+  }
+
+  double get totalCash => _totalForCategory(AccountCategory.cash);
+  double get totalBank => _totalForCategory(AccountCategory.bank);
+  double get totalReceivable => _totalForCategory(AccountCategory.receivable);
+  double get totalPayable => _totalForCategory(AccountCategory.payable);
+
+  /// This is what Home's hero card should show — liquid money only.
+  /// Deliberately excludes Receivable (owed but not collected yet).
+  double get availableBalance => totalCash + totalBank;
+
+  /// The REAL Net Assets figure — Assets minus Liabilities. This is
+  /// what belongs on the Balance Sheet report, not Home's hero card.
+  double get netAssets {
+    final totalAssets = allAccounts
+        .where((a) => a.type == AccountType.asset)
+        .fold(0.0, (s, a) => s + a.balance);
+    final totalLiabilities = allAccounts
+        .where((a) => a.type == AccountType.liability)
+        .fold(0.0, (s, a) => s + a.balance);
+    return totalAssets - totalLiabilities;
+  }
 }

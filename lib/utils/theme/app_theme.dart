@@ -28,7 +28,7 @@ class GAppTheme {
     brightness: Brightness.light,
     primaryColor: GColors.primary,
     disabledColor: GColors.grey,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: GColors.light,
     textTheme: GTextTheme.lightTextTheme,
     elevatedButtonTheme: GElevatedButtonTheme.lightElevatedButtonTheme,
     outlinedButtonTheme: GOutlinedButtonTheme.lightOutlinedButtonTheme,

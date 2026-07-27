@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:quick_ledger/features/ledger/screens/home/widget/balance_section.dart';
 import 'package:quick_ledger/utils/constants/colors.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/helpers/helper_functions.dart';
 
-/// Hero card at the top of Home showing the current ledger balance.
-/// Presentational only — pass the already-formatted amount string in
-/// (e.g. "$25,420") so this widget doesn't need to know about currency
-/// formatting or the intl package at all.
 class GBalanceCard extends StatelessWidget {
   const GBalanceCard({
     super.key,
-    required this.label,
-    required this.amount,
+    required this.netAssets,
+    required this.cashTotal,
+    required this.bankTotal,
+    required this.reievable
   });
 
-  final String label;
-  final String amount;
+  final String netAssets;
+
+  final String reievable;
+
+  final String cashTotal;
+
+  final String bankTotal;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,28 +30,55 @@ class GBalanceCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(GSizes.lg),
+
       decoration: BoxDecoration(
-        color: dark ? GColors.primary.withValues(alpha: 0.18) : GColors.primaryLight,
+        color: dark
+            ? GColors.primary.withValues(alpha: .2)
+            : GColors.primary.withValues(alpha:.2),
         borderRadius: BorderRadius.circular(GSizes.radiusLg),
       ),
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          /// Net Assets
+
           Text(
-            label,
-            style: TextStyle(
-              fontSize: GSizes.fontSizeSm,
-              color: dark ? GColors.primaryLight : GColors.primary,
-            ),
+            'Available Balance',
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: dark
+                      ? GColors.primaryLight
+                      : GColors.dark,
+                ),
           ),
+
           const SizedBox(height: GSizes.xs),
+
           Text(
-            amount,
-            style: TextStyle(
-              fontSize: GSizes.fontSizeXxl,
-              fontWeight: FontWeight.w600,
-              color: dark ? GColors.textPrimaryDark : GColors.dark,
-            ),
+            netAssets,
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+
+          const SizedBox(height:  GSizes.spaceBtwItems,),
+
+          GBalanceSection(
+            title: 'Cash',
+            total: cashTotal,
+          ),
+
+          /// Bank
+
+          GBalanceSection(
+            title: 'Bank',
+            total: bankTotal,
+  
+          ),
+           GBalanceSection(
+            title: 'Recievable',
+            total: reievable
+  
           ),
         ],
       ),

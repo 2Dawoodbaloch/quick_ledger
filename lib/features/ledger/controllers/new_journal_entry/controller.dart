@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
 import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
-import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_entries_model.dart';
+import 'package:quick_ledger/features/ledger/model/journal/journal_entries_model.dart';
 import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_line_model.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
 
@@ -73,6 +74,9 @@ class NewJournalEntryController extends GetxController {
     lines.add(line);
   }
 
+List<String> get accountOptions =>
+    AccountController.instance.allAccounts.map((a) => a.name).toList();
+    
   void removeLine(int index) {
     lines[index].dispose();
     lines.removeAt(index);

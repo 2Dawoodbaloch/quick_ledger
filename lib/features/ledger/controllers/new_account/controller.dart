@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
@@ -12,10 +13,36 @@ class NewAccountController extends GetxController {
 
   final selectedType = AccountType.expense.obs;
 
+  // category
+  late final Rx<AccountCategory> selectedCategory = categoriesForType(
+    selectedType.value,
+  ).first.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Generate code automatically
+    accountCodeController.text = generateAccountCode();
+  }
+
+  String generateAccountCode() {
+    final random = Random();
+    return 'ACC-${1000 + random.nextInt(9000)}';
+  }
+
   void setAccountType(AccountType? type) {
     if (type != null) {
       selectedType.value = type;
+      // Category options change with type — Asset's categories don't
+      // make sense for Liability, etc. — so reset to the first valid
+      // option for the new type rather than leaving a stale, now
+      // invalid category selected.
+      selectedCategory.value = categoriesForType(type).first;
     }
+  }
+
+  void setAccountCategory(AccountCategory? category) {
+    if (category != null) selectedCategory.value = category;
   }
 
   /// True only once the required fields are filled — used to disable
@@ -29,6 +56,7 @@ class NewAccountController extends GetxController {
     // if (!canCreate) return;
 
     final account = AccountModel(
+      category: selectedCategory.value,
       name: accountNameController.text.trim(),
       code: accountCodeController.text.trim(),
       type: selectedType.value,
@@ -75,7 +103,7 @@ class NewAccountController extends GetxController {
 //   }
 
 //   void createAccount() {
-//     // TODO
+//     
 //   }
 
 //   @override

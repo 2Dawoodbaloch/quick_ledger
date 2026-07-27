@@ -34,10 +34,17 @@ class AppRouter {
     GetPage(
       name: RoutesName.newJournalEntry,
       page: () => NewJournalEntryScreen(),
-      binding: NewJournalEntryBinding()
+      // binding: NewJournalEntryBinding()
     ),
 
     GetPage(name: RoutesName.accounts, page: () => AccountsScreen()),
-    GetPage(name: RoutesName.newAccounts, page: () => NewAccountScreen(),binding: NewAccountBinding())
+   GetPage(
+  name: RoutesName.newAccounts,
+  page: () {
+    print("PAGE BUILDER EXECUTED");
+    return NewAccountScreen();
+  },
+  // binding: NewAccountBinding(),
+),
   ];
 }

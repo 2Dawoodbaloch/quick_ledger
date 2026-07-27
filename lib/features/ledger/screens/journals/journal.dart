@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:quick_ledger/common/widgets/screens/empty_state.dart';
 import 'package:quick_ledger/common/widgets/text_fields/search_bar.dart';
 import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
-import 'package:quick_ledger/features/ledger/model/journal/widget/journal_filter_chips.dart';
+import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/widgets/journal_filter_chips.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/new_journal_entry.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/widget/journal_entry_list.dart';
 import 'package:quick_ledger/routes/routes_name.dart';
@@ -68,7 +68,8 @@ class JournalsScreen extends StatelessWidget {
                       subtitle: GTexts.noJournalEntriesSubtitle,
                       buttonLabel: '+ ${GTexts.newJournalEntry}',
                       onButtonTap: () {
-                        Get.to(() => NewJournalEntryScreen());
+                        // Get.toNamed(RoutesName.newJournalEntry);
+                        Get.to(NewJournalEntryScreen());
                       },
                     ),
                   );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quick_ledger/common/widgets/screens/empty_state.dart';
 import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/new_account/controller.dart';
 import 'package:quick_ledger/features/ledger/screens/accounts/new_accounts/new_accounts.dart';
 import 'package:quick_ledger/features/ledger/screens/accounts/widgets/account_title.dart';
 import 'package:quick_ledger/routes/routes_name.dart';
@@ -16,6 +17,7 @@ class AccountsScreen extends StatelessWidget {
   AccountsScreen({super.key});
 
   final controller = Get.find<AccountController>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +54,13 @@ class AccountsScreen extends StatelessWidget {
                         buttonLabel: '+ ${GTexts.newAccount}',
                         secondaryLabel: GTexts.useStarterTemplate,
                         onSecondaryTap: () {
-                          // TODO: seed a default Chart of Accounts
+                              // Get.to(() => NewAccountScreen());
+                         
+                              //     Get.toNamed(RoutesName.newAccounts);
                         },
                         onButtonTap: () {
-                          // Get.to(() => NewAccountScreen());
-                          Get.toNamed(RoutesName.newAccounts);
+                          // Get.toNamed(RoutesName.newAccounts);
+                     Get.to(() => NewAccountScreen());  
                         },
                       ),
                     ),

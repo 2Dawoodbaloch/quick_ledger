@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_entries_model.dart';
+import 'package:quick_ledger/features/ledger/model/journal/journal_entries_model.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/widgets/status_pill.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
@@ -32,23 +32,23 @@ class GJournalEntryTile extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(entry.reference, style: Theme.of(context).textTheme.titleSmall),
+                  Text(entry.reference, style: Theme.of(context).textTheme.titleMedium),
                   GStatusPill(status: entry.status),
                 ],
               ),
               const SizedBox(height: 2),
-              Text(entry.narration, style: Theme.of(context).textTheme.bodyMedium),
+              Text(entry.narration, style: Theme.of(context).textTheme.bodyLarge),
               const SizedBox(height: GSizes.xs),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     '${_formatDate(entry.date)} · ${entry.journalType.label}',
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Text(
                     '\$${entry.amount.toStringAsFixed(0)}',
-                    style: Theme.of(context).textTheme.titleSmall,
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ],
               ),

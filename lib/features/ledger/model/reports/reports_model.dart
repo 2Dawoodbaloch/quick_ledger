@@ -1,10 +1,10 @@
 import 'package:quick_ledger/utils/constants/enum.dart';
 
+
 class AccountModel {
   final String name;
   final String code;
   final AccountType type;
-  final AccountCategory category;
   final double balance;
   final String? description;
 
@@ -12,7 +12,6 @@ class AccountModel {
     required this.name,
     required this.code,
     required this.type,
-    required this.category,
     required this.balance,
     this.description,
   });

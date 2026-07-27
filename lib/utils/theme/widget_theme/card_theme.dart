@@ -11,7 +11,7 @@ class GCardTheme {
     margin: EdgeInsets.zero,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(GSizes.cardRadiusSm),
-      side: const BorderSide(color: GColors.lightGrey, width: 0.5),
+      side: const BorderSide(color: GColors.lightGrey, width: 1), //// width 0.5 defalult
     ),
   );
 
@@ -21,7 +21,7 @@ class GCardTheme {
     margin: EdgeInsets.zero,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(GSizes.cardRadiusSm),
-      side: const BorderSide(color: GColors.borderDark, width: 0.5),
+      side: const BorderSide(color: GColors.borderDark, width: 1), // width 0.5 defalult
     ),
   );
 }

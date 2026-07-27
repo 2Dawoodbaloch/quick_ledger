@@ -42,6 +42,7 @@ class GSnackBarHelpers {
   }
 
   /// Success Green Snack bar
+  // ignore: strict_top_level_inference
   static void successSnackBar({required title, message = '', duration = 3}) {
     Get.snackbar(title, message,
         isDismissible: true,

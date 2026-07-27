@@ -10,7 +10,6 @@ class NavigationBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<HomeController>(() => HomeController());
-    Get.lazyPut<NewAccountController>(() => NewAccountController());
     Get.lazyPut<AccountController>(() => AccountController());
     Get.lazyPut<JournalController>(() => JournalController());
   }

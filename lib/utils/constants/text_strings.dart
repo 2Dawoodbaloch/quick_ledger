@@ -87,6 +87,7 @@ class GTexts {
   static const String goodEvening = 'Good evening';
   static const String ledgerOverview = "Here's your ledger overview";
   static const String currentBalance = 'Current balance';
+  static const String netBalance = "Net balance";
   static const String income = 'Income';
   static const String expense = 'Expense';
   static const String profit = 'Profit';
@@ -138,6 +139,7 @@ class GTexts {
   static const String accountName = 'Account name';
   static const String accountCode = 'Account code';
   static const String accountType = 'Type';
+  static const String accountCategory = 'Category';
   static const String openingBalance = 'Opening balance';
   static const String description = 'Description (optional)';
   static const String createsAccount = 'Create account';

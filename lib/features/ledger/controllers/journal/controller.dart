@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_entries_model.dart';
+import 'package:quick_ledger/features/ledger/model/journal/journal_entries_model.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
 
 class JournalController extends GetxController {

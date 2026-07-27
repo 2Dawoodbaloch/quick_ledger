@@ -73,7 +73,7 @@ class GJournalLineCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(GTexts.debit, style: Theme.of(context).textTheme.labelMedium),
+                    Text(GTexts.debit, style: Theme.of(context).textTheme.labelLarge),
                     const SizedBox(height: 2),
                     TextFormField(
                       controller: line.debitController,
@@ -88,7 +88,7 @@ class GJournalLineCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(GTexts.credit, style: Theme.of(context).textTheme.labelMedium),
+                    Text(GTexts.credit, style: Theme.of(context).textTheme.labelLarge),
                     const SizedBox(height: 2),
                     TextFormField(
                       controller: line.creditController,

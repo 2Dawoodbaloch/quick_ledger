@@ -1,4 +1,4 @@
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quick_ledger/common/style/padding.dart';
@@ -20,8 +20,8 @@ class NewAccountScreen extends StatelessWidget {
   /// that happened when different buttons used different Get.to()
   /// calls and only some of them carried the binding.
 
-
-  final controller = Get.find<NewAccountController>();
+  // final controller = Get.find<NewAccountController>();
+  final controller = Get.put(NewAccountController());
 
   @override
   Widget build(BuildContext context) {
@@ -49,18 +49,28 @@ class NewAccountScreen extends StatelessWidget {
                     child: GFormField(
                       label: GTexts.accountCode,
                       controller: controller.accountCodeController,
+                      readOnly: true,
                     ),
                   ),
+
+                  // account type
                   const SizedBox(width: GSizes.spaceBtwItems),
                   Expanded(
                     child: Obx(
                       () => GDropdownField<AccountType>(
-                        label: GTexts.accountType, // was GTexts.accounts — wrong label
+                        label: GTexts
+                            .accountType, // was GTexts.accounts — wrong label
                         value: controller.selectedType.value,
                         items: AccountType.values
-                            .map((e) => DropdownMenuItem(value: e, child: Text(e.label)))
+                            .map(
+                              (e) => DropdownMenuItem(
+                                value: e,
+                                child: Text(e.label),
+                              ),
+                            )
                             .toList(),
-                        onChanged: controller.setAccountType, // was (value) => controller.setAccountType — never fired
+                        onChanged: controller
+                            .setAccountType, // was (value) => controller.setAccountType — never fired
                       ),
                     ),
                   ),
@@ -69,11 +79,25 @@ class NewAccountScreen extends StatelessWidget {
 
               const SizedBox(height: GSizes.spaceBtwItems),
 
-              /// Category Preview
+              /// Type Preview
               Obx(
-                () => GAccountTypeCard(selectedType: controller.selectedType.value),
+                () => GAccountTypeCard(
+                  selectedType: controller.selectedType.value,
+                ),
               ),
 
+              const SizedBox(height: GSizes.spaceBtwItems),
+
+              GDropdownField(
+                label: GTexts.accountCategory,
+                value: controller.selectedCategory.value,
+                items: AccountCategory.values
+                    .map(
+                      (e) => DropdownMenuItem(value: e, child: Text(e.label)),
+                    )
+                    .toList(),
+                onChanged: (value) => controller.setAccountCategory(value),
+              ),
               const SizedBox(height: GSizes.spaceBtwItems),
 
               /// Opening Balance
@@ -97,12 +121,10 @@ class NewAccountScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: GElevatedButton(
-                  
-                    onPressed: controller.createAccount,
-                    // onPressed: controller.canCreate ? controller.createAccount : null,
-                    child: Text(GTexts.createAccount),
-                  ),
-                
+                  onPressed: controller.createAccount,
+                  // onPressed: controller.canCreate ? controller.createAccount : null,
+                  child: Text(GTexts.createAccount),
+                ),
               ),
             ],
           ),
@@ -140,7 +162,6 @@ class NewAccountScreen extends StatelessWidget {
 //             crossAxisAlignment: CrossAxisAlignment.start,
 //             children: [
 
-              
 //               /// Account Name
 //               GFormField(
 //                 label: GTexts.accountName,

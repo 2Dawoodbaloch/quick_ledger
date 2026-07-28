@@ -33,8 +33,6 @@ class JournalController extends GetxController {
   List<JournalEntryModel> get recentEntries => allEntries.take(4).toList();
 
   void setFilter(JournalType? type) => selectedFilter.value = type;
-
   void setSearchQuery(String query) => searchQuery.value = query;
-
   void addEntry(JournalEntryModel entry) => allEntries.insert(0, entry);
 }

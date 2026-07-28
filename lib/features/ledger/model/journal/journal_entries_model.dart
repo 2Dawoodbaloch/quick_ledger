@@ -9,8 +9,9 @@ class JournalEntryModel {
   final JournalStatus status;
   final double amount;
 
+
   // Frozen at posting time — this is what makes Reports possible.
-  // Without knowing which accounts (and account TYPES) each line
+  // Without knowing which accounts (and account TYPES) each lineche
   // touched, Profit & Loss / Trial Balance can't be computed for real.
   final List<JournalLineSnapshot> lines;
 
@@ -21,6 +22,8 @@ class JournalEntryModel {
     required this.journalType,
     required this.status,
     required this.amount,
+
+
     this.lines = const [],
   });
 }

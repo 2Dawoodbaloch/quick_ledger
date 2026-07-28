@@ -16,6 +16,7 @@ class JournalLineModel {
   final TextEditingController debitController;
   final TextEditingController creditController;
 
+
   void dispose() {
     debitController.dispose();
     creditController.dispose();

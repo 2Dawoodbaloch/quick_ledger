@@ -4,31 +4,20 @@ import 'package:intl/intl.dart';
 import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
 import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
 import 'package:quick_ledger/features/ledger/model/journal/journal_entries_model.dart';
+import 'package:quick_ledger/features/ledger/model/journal/journal_line_snapshot.dart';
 import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_line_model.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
-
-
-
-// this is just a placeholder list so the dropdown has something to
-// show while building the UI.
-const List<String> kPlaceholderAccountNames = [
-  'Cash in hand',
-  'Bank account',
-  'Accounts receivable',
-  'Accounts payable',
-  'Sales revenue',
-  'Rent expense',
-  'Payroll expense',
-];
 
 class NewJournalEntryController extends GetxController {
   static NewJournalEntryController get instance => Get.find();
 
+  // ============================================================
+  // HEADER FIELDS — Journal type, Reference, Date, Narration
+  // ============================================================
+
   final Rx<JournalType> selectedJournalType = JournalType.sales.obs;
   final Rx<DateTime> selectedDate = DateTime.now().obs;
-
   final narrationController = TextEditingController();
-
   final dateFormat = DateFormat('MMM d, yyyy');
 
   /// Auto-generates the next reference number based on how many
@@ -46,8 +35,25 @@ class NewJournalEntryController extends GetxController {
     if (type != null) selectedJournalType.value = type;
   }
 
+  Future<void> pickDate(BuildContext context) async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate.value,
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null) selectedDate.value = picked;
+  }
+
   // ============================================================
-  // LINES
+  // ACCOUNT OPTIONS — real accounts, read live from AccountController
+  // ============================================================
+
+  List<String> get accountOptions =>
+      AccountController.instance.allAccounts.map((a) => a.name).toList();
+
+  // ============================================================
+  // LINES — add/remove, one-field-active rule, live totals
   // ============================================================
 
   /// Starts with two blank lines — a journal entry always needs at
@@ -56,6 +62,8 @@ class NewJournalEntryController extends GetxController {
 
   final RxDouble totalDebit = 0.0.obs;
   final RxDouble totalCredit = 0.0.obs;
+
+  bool _isClearing = false; // guards against listener feedback loops
 
   @override
   void onInit() {
@@ -74,16 +82,11 @@ class NewJournalEntryController extends GetxController {
     lines.add(line);
   }
 
-List<String> get accountOptions =>
-    AccountController.instance.allAccounts.map((a) => a.name).toList();
-    
   void removeLine(int index) {
     lines[index].dispose();
     lines.removeAt(index);
     _recalculateTotals();
   }
-
-  bool _isClearing = false; // guards against listener feedback loops
 
   void _onFieldChanged(JournalLineModel line, {required bool isDebit}) {
     if (_isClearing) return;
@@ -115,6 +118,10 @@ List<String> get accountOptions =>
     totalCredit.value = creditSum;
   }
 
+  // ============================================================
+  // BALANCE CHECK
+  // ============================================================
+
   bool get isBalanced => totalDebit.value == totalCredit.value && totalDebit.value > 0;
 
   double get difference => (totalDebit.value - totalCredit.value).abs();
@@ -124,6 +131,41 @@ List<String> get accountOptions =>
   /// whole ledger's integrity, so it's checked here, not just in the UI.
   bool get canPost => isBalanced && lines.length >= 2;
 
+  // ============================================================
+  // BUILD + SAVE — this is where the earlier bug was: _buildEntry()
+  // never called anything to freeze the lines, so every posted entry
+  // silently had NO line data at all, no matter how the form looked.
+  // ============================================================
+
+  /// Freezes each line's account + debit/credit at posting time,
+  /// looking up the account's TYPE from AccountController — this is
+  /// what Reports/the detail screen need later to know "was this line
+  /// an Income account? An Expense account?" without guessing.
+  /// Lines with no account selected are skipped (nothing to freeze).
+  List<JournalLineSnapshot> _buildLineSnapshots() {
+    final accounts = AccountController.instance.allAccounts;
+
+    return lines
+        .where((line) => line.accountName.value != null)
+        .map((line) {
+          final matchedAccount = accounts.firstWhereOrNull(
+            (a) => a.name == line.accountName.value,
+          );
+          // Falls back to `expense` only if somehow no match is found
+          // (shouldn't happen since the dropdown only offers real
+          // accounts) — safer than crashing.
+          final accountType = matchedAccount?.type ?? AccountType.expense;
+
+          return JournalLineSnapshot(
+            accountName: line.accountName.value!,
+            accountType: accountType,
+            debit: double.tryParse(line.debitController.text) ?? 0,
+            credit: double.tryParse(line.creditController.text) ?? 0,
+          );
+        })
+        .toList();
+  }
+
   JournalEntryModel _buildEntry(JournalStatus status) {
     return JournalEntryModel(
       reference: reference,
@@ -132,6 +174,7 @@ List<String> get accountOptions =>
       journalType: selectedJournalType.value,
       status: status,
       amount: totalDebit.value,
+      lines: _buildLineSnapshots(), // ← this line was missing before
     );
   }
 
@@ -141,20 +184,28 @@ List<String> get accountOptions =>
   }
 
   void postEntry() {
-    if (!canPost) return;
-    JournalController.instance.addEntry(_buildEntry(JournalStatus.posted));
-    Get.back();
-  }
+  if (!canPost) return;
 
-  Future<void> pickDate(BuildContext context) async {
-    final picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate.value,
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2100),
-    );
-    if (picked != null) selectedDate.value = picked;
-  }
+  final entry = _buildEntry(JournalStatus.posted);
+
+  // Update account balances
+  AccountController.instance.postJournal(entry);
+
+  // Save journal
+  JournalController.instance.addEntry(entry);
+
+  Get.back();
+}
+
+  // void postEntry() {
+  //   if (!canPost) return;
+  //   JournalController.instance.addEntry(_buildEntry(JournalStatus.posted));
+  //   Get.back();
+  // }
+
+  // ============================================================
+  // CLEANUP
+  // ============================================================
 
   @override
   void onClose() {

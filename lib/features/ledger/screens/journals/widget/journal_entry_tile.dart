@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:quick_ledger/features/ledger/controllers/new_journal_entry/controller.dart';
 import 'package:quick_ledger/features/ledger/model/journal/journal_entries_model.dart';
+import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_line_model.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/widgets/status_pill.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
@@ -9,17 +13,13 @@ import 'package:quick_ledger/utils/constants/sizes.dart';
 /// narration, date/type+amount) that don't map cleanly onto
 /// ListTile's single leading/title/subtitle/trailing slots.
 class GJournalEntryTile extends StatelessWidget {
-  const GJournalEntryTile({
-    super.key,
-    required this.entry,
-    this.onTap,
-  });
+  const GJournalEntryTile({super.key, required this.entry, this.onTap});
 
   final JournalEntryModel entry;
   final VoidCallback? onTap;
-
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(NewJournalEntryController());
     return Card(
       child: InkWell(
         onTap: onTap,
@@ -32,12 +32,19 @@ class GJournalEntryTile extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(entry.reference, style: Theme.of(context).textTheme.titleMedium),
+                  Text(
+                    entry.reference,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                 
                   GStatusPill(status: entry.status),
                 ],
               ),
               const SizedBox(height: 2),
-              Text(entry.narration, style: Theme.of(context).textTheme.bodyLarge),
+              Text(
+                entry.narration,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
               const SizedBox(height: GSizes.xs),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,8 +68,18 @@ class GJournalEntryTile extends StatelessWidget {
 
   String _formatDate(DateTime date) {
     const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return '${months[date.month - 1]} ${date.day}, ${date.year}';
   }

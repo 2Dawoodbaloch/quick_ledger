@@ -103,6 +103,7 @@ class GAccountTile extends StatelessWidget {
                       account.category.label,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
+                    
                   ],
                 ),
               ),

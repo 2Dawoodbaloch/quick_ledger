@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:quick_ledger/features/ledger/model/accounts/account_model.dart';
+import 'package:quick_ledger/features/ledger/model/journal/journal_entries_model.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
 
 class AccountController extends GetxController {
@@ -81,4 +82,47 @@ class AccountController extends GetxController {
         .fold(0.0, (s, a) => s + a.balance);
     return totalAssets - totalLiabilities;
   }
+
+
+void postJournal(JournalEntryModel journal) {
+  for (final line in journal.lines) {
+    // Find the real account
+    final account = allAccounts.firstWhereOrNull(
+      (a) => a.name == line.accountName,
+    );
+
+    if (account == null) {
+      print("Account not found: ${line.accountName}");
+      continue;
+    }
+
+    print("--------------------------------");
+    print("Posting to: ${account.name}");
+    print("Type: ${account.type}");
+    print("Old Balance: ${account.balance}");
+    print("Debit: ${line.debit}");
+    print("Credit: ${line.credit}");
+
+    switch (account.type) {
+      case AccountType.asset:
+        account.balance += line.debit;
+        account.balance -= line.credit;
+        break;
+
+      case AccountType.income:
+        account.balance -= line.debit;
+        account.balance += line.credit;
+        break;
+
+      default:
+        // We'll implement these later
+        break;
+    }
+
+    print("New Balance: ${account.balance}");
+  }
+
+  // Notify GetX that balances changed
+  allAccounts.refresh();
+}
 }

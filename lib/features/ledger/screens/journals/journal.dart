@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:quick_ledger/common/widgets/screens/empty_state.dart';
 import 'package:quick_ledger/common/widgets/text_fields/search_bar.dart';
 import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
+import 'package:quick_ledger/features/ledger/screens/journals/journal_detail_screen/journal_detail_screen.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/widgets/journal_filter_chips.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/new_journal_entry.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/widget/journal_entry_list.dart';
@@ -79,7 +80,7 @@ class JournalsScreen extends StatelessWidget {
                 // work, since that getter already applies both.
                 return GJournalEntryList(
                   entries: controller.filteredEntries,
-                  onEntryTap: (entry) {},
+                  onEntryTap: JournalEntryDetailScreen.open
                 );
               }),
             ),

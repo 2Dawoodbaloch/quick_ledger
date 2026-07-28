@@ -56,6 +56,7 @@ class NewAccountController extends GetxController {
     // if (!canCreate) return;
 
     final account = AccountModel(
+      id: accountCodeController.text,
       category: selectedCategory.value,
       name: accountNameController.text.trim(),
       code: accountCodeController.text.trim(),

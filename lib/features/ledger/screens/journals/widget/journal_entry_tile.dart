@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:quick_ledger/features/ledger/controllers/new_journal_entry/controller.dart';
 import 'package:quick_ledger/features/ledger/model/journal/journal_entries_model.dart';
-import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_line_model.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/widgets/status_pill.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
@@ -19,7 +15,7 @@ class GJournalEntryTile extends StatelessWidget {
   final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(NewJournalEntryController());
+  
     return Card(
       child: InkWell(
         onTap: onTap,

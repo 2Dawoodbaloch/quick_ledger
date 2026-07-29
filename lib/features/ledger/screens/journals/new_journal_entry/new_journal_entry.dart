@@ -2,20 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:quick_ledger/common/widgets/text_field.dart/date_field.dart';
-import 'package:quick_ledger/common/widgets/text_field.dart/drop_down_field.dart';
 import 'package:quick_ledger/common/widgets/text_field.dart/form_field.dart';
 import 'package:quick_ledger/features/ledger/controllers/new_journal_entry/controller.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/widgets/balance_banner.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/widgets/journal_line_card.dart';
-import 'package:quick_ledger/utils/constants/enum.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/constants/text_strings.dart';
 
 class NewJournalEntryScreen extends StatelessWidget {
   NewJournalEntryScreen({super.key});
 
-  // final controller = Get.find<NewJournalEntryController>();
-  final controller = Get.put(NewJournalEntryController());
+  final controller = Get.find<NewJournalEntryController>();
   final currencyFormat = NumberFormat.currency(symbol: '\$', decimalDigits: 0);
 
   @override

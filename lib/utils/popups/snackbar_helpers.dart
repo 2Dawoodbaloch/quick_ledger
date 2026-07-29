@@ -7,6 +7,7 @@ import '../helpers/helper_functions.dart';
 
 class GSnackBarHelpers {
 
+  // ignore: strict_top_level_inference
   static void customToast({required message}){
     ScaffoldMessenger.of(Get.context!).showSnackBar(
         SnackBar(
@@ -56,6 +57,7 @@ class GSnackBarHelpers {
   }
 
   /// Error Red Snack bar
+  // ignore: strict_top_level_inference
   static void errorSnackBar({required title, message = ''}) {
     Get.snackbar(title, message,
         isDismissible: true,

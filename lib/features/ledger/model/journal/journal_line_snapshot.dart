@@ -10,8 +10,10 @@ class JournalLineSnapshot {
   final AccountType accountType;
   final double debit;
   final double credit;
+  final String accountCode;
 
   JournalLineSnapshot({
+    required this.accountCode,
     required this.accountName,
     required this.accountType,
     required this.debit,

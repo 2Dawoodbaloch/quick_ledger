@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
 import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_line_model.dart';
 import 'package:quick_ledger/utils/constants/colors.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
@@ -50,9 +53,25 @@ class GJournalLineCard extends StatelessWidget {
                       hint: const Text('Select account'),
                       value: line.accountName.value,
                       items: accountOptions
-                          .map((name) => DropdownMenuItem(value: name, child: Text(name)))
+                          .map(
+                            (name) => DropdownMenuItem(
+                              value: name,
+                              child: Text(name),
+                            ),
+                          )
                           .toList(),
-                      onChanged: (value) => line.accountName.value = value,
+                      onChanged: (value) {
+                        final account = AccountController.instance.allAccounts
+                            .firstWhere((a) => a.name == value);
+
+                        line.accountName.value = account.name;
+                        line.accountCode.value = account.code;
+
+                        log(
+                          "Selected Account -> ${account.name} (${account.code})",
+                          name: "DROPDOWN",
+                        );
+                      },
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
@@ -73,11 +92,16 @@ class GJournalLineCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(GTexts.debit, style: Theme.of(context).textTheme.labelLarge),
+                    Text(
+                      GTexts.debit,
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
                     const SizedBox(height: 2),
                     TextFormField(
                       controller: line.debitController,
-                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                      keyboardType: const TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
                       decoration: const InputDecoration(hintText: '0'),
                     ),
                   ],
@@ -88,11 +112,16 @@ class GJournalLineCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(GTexts.credit, style: Theme.of(context).textTheme.labelLarge),
+                    Text(
+                      GTexts.credit,
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
                     const SizedBox(height: 2),
                     TextFormField(
                       controller: line.creditController,
-                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                      keyboardType: const TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
                       decoration: const InputDecoration(hintText: '0'),
                     ),
                   ],

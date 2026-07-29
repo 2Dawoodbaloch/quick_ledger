@@ -9,5 +9,6 @@ class NewAccountBinding extends Bindings {
     Get.lazyPut<NewAccountController>(
       () => NewAccountController(),
     );
+    // Get.put(NewAccountController());
   }
 }

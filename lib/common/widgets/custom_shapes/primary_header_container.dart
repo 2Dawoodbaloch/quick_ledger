@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:quick_ledger/common/widgets/custom_shapes/circular_container.dart';
 import 'package:quick_ledger/common/widgets/custom_shapes/colors.dart';
 import 'package:quick_ledger/common/widgets/custom_shapes/rounded_container.dart';
-import 'package:quick_ledger/common/widgets/custom_shapes/rounded_edges_container.dart';
 import 'package:quick_ledger/common/widgets/custom_shapes/sizes.dart';
 
 class UPrimaryHeaderContainer extends StatelessWidget {

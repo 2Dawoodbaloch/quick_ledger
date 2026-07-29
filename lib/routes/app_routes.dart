@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:quick_ledger/bindings/navigation_binding.dart';
 import 'package:quick_ledger/bindings/new_account_screen_binding.dart';
@@ -34,16 +36,17 @@ class AppRouter {
     GetPage(
       name: RoutesName.newJournalEntry,
       page: () => NewJournalEntryScreen(),
-      // binding: NewJournalEntryBinding()
+      binding: NewJournalEntryBinding()
     ),
 
     GetPage(name: RoutesName.accounts, page: () => AccountsScreen()),
    GetPage(
   name: RoutesName.newAccounts,
   page: () {
-    print("PAGE BUILDER EXECUTED");
+    log("PAGE BUILDER EXECUTED");
     return NewAccountScreen();
   },
+    binding: NewAccountBinding(),
   // binding: NewAccountBinding(),
 ),
   ];

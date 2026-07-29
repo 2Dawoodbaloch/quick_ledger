@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quick_ledger/common/widgets/screens/empty_state.dart';
 import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
-import 'package:quick_ledger/features/ledger/controllers/new_account/controller.dart';
-import 'package:quick_ledger/features/ledger/screens/accounts/new_accounts/new_accounts.dart';
 import 'package:quick_ledger/features/ledger/screens/accounts/widgets/account_title.dart';
 import 'package:quick_ledger/routes/routes_name.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
@@ -59,8 +57,8 @@ class AccountsScreen extends StatelessWidget {
                               //     Get.toNamed(RoutesName.newAccounts);
                         },
                         onButtonTap: () {
-                          // Get.toNamed(RoutesName.newAccounts);
-                     Get.to(() => NewAccountScreen());  
+                          Get.toNamed(RoutesName.newAccounts);
+          
                         },
                       ),
                     ),

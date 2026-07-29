@@ -13,9 +13,9 @@ class RoutesName {
 
   // journal
   static const String journal = "/journal screen";
-  static const String newJournalEntry = "/new journal entry screen";
+  static const String newJournalEntry = "/new-journal-entry-screen";
 
   // accounts
   static const String accounts = '/accounts screen';
-  static const String newAccounts = '/new accounts screen';
+  static const String newAccounts = '/new-accounts-screen';
 }

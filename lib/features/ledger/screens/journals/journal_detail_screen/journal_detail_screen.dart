@@ -128,8 +128,10 @@ class JournalEntryDetailScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                        Text(line.accountCode, style: Theme.of(context).textTheme.bodyLarge),
                       Text(line.accountType.label),
                       Text(line.accountName, style: Theme.of(context).textTheme.bodyLarge),
+                      
                       Text(
                         '${isDebit ? 'Dr' : 'Cr'} ${currencyFormat.format(amount)}',
                         style: TextStyle(

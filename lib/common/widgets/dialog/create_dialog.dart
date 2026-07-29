@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:quick_ledger/features/ledger/screens/accounts/new_accounts/new_accounts.dart';
-import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/new_journal_entry.dart';
 import 'package:quick_ledger/routes/routes_name.dart';
 
 class GCreateDialog extends StatelessWidget {
@@ -25,8 +23,8 @@ class GCreateDialog extends StatelessWidget {
             subtitle: const Text('Record a transaction'),
             onTap: () {
               Get.back();
-              // Get.toNamed(RoutesName.newJournalEntry);
-              Get.to(NewJournalEntryScreen());
+              Get.toNamed(RoutesName.newJournalEntry);
+              // Get.to(NewJournalEntryScreen());
            
             },
           ),
@@ -39,9 +37,8 @@ class GCreateDialog extends StatelessWidget {
             subtitle: const Text('Create a ledger account'),
             onTap: () {
               Get.back();
-
-              // Get.toNamed(RoutesName.newAccounts);
-              Get.to(NewAccountScreen());
+              Get.toNamed(RoutesName.newAccounts);
+              // Get.to(NewAccountScreen());
        
             },
           ),

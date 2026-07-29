@@ -7,6 +7,7 @@ import 'package:quick_ledger/features/ledger/screens/journals/journal_detail_scr
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/widgets/journal_filter_chips.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/new_journal_entry.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/widget/journal_entry_list.dart';
+import 'package:quick_ledger/routes/routes_name.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/constants/text_strings.dart';
 
@@ -68,8 +69,8 @@ class JournalsScreen extends StatelessWidget {
                       subtitle: GTexts.noJournalEntriesSubtitle,
                       buttonLabel: '+ ${GTexts.newJournalEntry}',
                       onButtonTap: () {
-                        // Get.toNamed(RoutesName.newJournalEntry);
-                        Get.to(NewJournalEntryScreen());
+                        Get.toNamed(RoutesName.newJournalEntry);
+                        // Get.to(NewJournalEntryScreen());
                       },
                     ),
                   );

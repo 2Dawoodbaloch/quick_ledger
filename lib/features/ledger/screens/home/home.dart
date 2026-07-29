@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
@@ -11,7 +13,6 @@ import 'package:quick_ledger/features/ledger/screens/home/widget/balance_card.da
 import 'package:quick_ledger/features/ledger/screens/home/widget/home_header.dart';
 import 'package:quick_ledger/features/ledger/screens/home/widget/recent_transactions_list.dart';
 import 'package:quick_ledger/features/ledger/screens/home/widget/summary_row.dart';
-import 'package:quick_ledger/utils/constants/enum.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/constants/text_strings.dart';
 
@@ -24,19 +25,19 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("------ DASHBOARD ------");
+    log("------ DASHBOARD ------");
 
     for (final account in accountController.allAccounts) {
-      print(
+      log(
         "${account.name} | "
         "${account.category} | "
         "${account.balance}",
       );
     }
 
-    print("Total Cash: ${accountController.totalCash}");
-    print("Total Bank: ${accountController.totalBank}");
-    print("Available: ${accountController.availableBalance}");
+    log("Total Cash: ${accountController.totalCash}");
+    log("Total Bank: ${accountController.totalBank}");
+    log("Available: ${accountController.availableBalance}");
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(

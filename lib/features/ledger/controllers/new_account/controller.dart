@@ -1,4 +1,6 @@
-import 'dart:math';
+import 'dart:developer';
+import 'dart:math' hide log;
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
@@ -69,7 +71,8 @@ class NewAccountController extends GetxController {
           : descriptionController.text.trim(),
     );
    
-    print(
+    log(
+      "Code : ${account.code}"
       "Name: ${account.name}, "
       "Type: ${account.type}, "
       "Category: ${account.category}",

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:quick_ledger/features/ledger/model/accounts/account_model.dart';
 import 'package:quick_ledger/features/ledger/model/journal/journal_entries_model.dart';
@@ -28,10 +30,11 @@ class AccountController extends GetxController {
 
   void addAccount(AccountModel account) {
     allAccounts.add(account);
-    print("========== ALL ACCOUNTS ==========");
+    log("========== ALL ACCOUNTS ==========");
 
     for (final a in allAccounts) {
-      print(
+      log(
+        "Code : ${a.code}"
         "Name: ${a.name} | "
         "Type: ${a.type} | "
         "Category: ${a.category} | "
@@ -39,7 +42,7 @@ class AccountController extends GetxController {
       );
     }
 
-    print("==================================");
+    log("==================================");
   }
 
   // ============================================================
@@ -92,16 +95,17 @@ void postJournal(JournalEntryModel journal) {
     );
 
     if (account == null) {
-      print("Account not found: ${line.accountName}");
+      log("Account not found: ${line.accountName}");
       continue;
     }
 
-    print("--------------------------------");
-    print("Posting to: ${account.name}");
-    print("Type: ${account.type}");
-    print("Old Balance: ${account.balance}");
-    print("Debit: ${line.debit}");
-    print("Credit: ${line.credit}");
+    log("--------------------------------");
+    log("Posting to: ${account.name}");
+    log("Type: ${account.type}");
+     log("code: ${account.code}");
+    log("Old Balance: ${account.balance}");
+    log("Debit: ${line.debit}");
+    log("Credit: ${line.credit}");
 
     switch (account.type) {
       case AccountType.asset:
@@ -119,7 +123,7 @@ void postJournal(JournalEntryModel journal) {
         break;
     }
 
-    print("New Balance: ${account.balance}");
+    log("New Balance: ${account.balance}");
   }
 
   // Notify GetX that balances changed

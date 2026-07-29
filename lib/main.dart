@@ -1,8 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quick_ledger/bindings/navigation_binding.dart';
 import 'package:quick_ledger/routes/app_routes.dart';
-import 'package:quick_ledger/routes/routes_name.dart';
 import 'package:quick_ledger/utils/theme/app_theme.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     for (final page in AppRouter.pages) {
-      print("ROUTE: ${page.name}");
+      log("ROUTE: ${page.name}");
     }
     return GetMaterialApp(
       title: 'Flutter Demo',

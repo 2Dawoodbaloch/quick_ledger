@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -74,11 +76,16 @@ class NewJournalEntryController extends GetxController {
 
   void addLine() {
     final line = JournalLineModel();
+
     // Listeners recalculate totals live as the user types, and
     // enforce "a line is either debit OR credit, never both" by
     // clearing the opposite field the moment one gets a value.
-    line.debitController.addListener(() => _onFieldChanged(line, isDebit: true));
-    line.creditController.addListener(() => _onFieldChanged(line, isDebit: false));
+    line.debitController.addListener(
+      () => _onFieldChanged(line, isDebit: true),
+    );
+    line.creditController.addListener(
+      () => _onFieldChanged(line, isDebit: false),
+    );
     lines.add(line);
   }
 
@@ -122,48 +129,49 @@ class NewJournalEntryController extends GetxController {
   // BALANCE CHECK
   // ============================================================
 
-  bool get isBalanced => totalDebit.value == totalCredit.value && totalDebit.value > 0;
+  bool get isBalanced =>
+      totalDebit.value == totalCredit.value && totalDebit.value > 0;
 
   double get difference => (totalDebit.value - totalCredit.value).abs();
 
-  /// Post is only allowed once the entry actually balances and has
-  /// at least two lines — this is the one rule that protects the
-  /// whole ledger's integrity, so it's checked here, not just in the UI.
   bool get canPost => isBalanced && lines.length >= 2;
 
-  // ============================================================
-  // BUILD + SAVE — this is where the earlier bug was: _buildEntry()
-  // never called anything to freeze the lines, so every posted entry
-  // silently had NO line data at all, no matter how the form looked.
-  // ============================================================
-
-  /// Freezes each line's account + debit/credit at posting time,
-  /// looking up the account's TYPE from AccountController — this is
-  /// what Reports/the detail screen need later to know "was this line
-  /// an Income account? An Expense account?" without guessing.
-  /// Lines with no account selected are skipped (nothing to freeze).
   List<JournalLineSnapshot> _buildLineSnapshots() {
     final accounts = AccountController.instance.allAccounts;
 
-    return lines
-        .where((line) => line.accountName.value != null)
-        .map((line) {
-          final matchedAccount = accounts.firstWhereOrNull(
-            (a) => a.name == line.accountName.value,
-          );
-          // Falls back to `expense` only if somehow no match is found
-          // (shouldn't happen since the dropdown only offers real
-          // accounts) — safer than crashing.
-          final accountType = matchedAccount?.type ?? AccountType.expense;
+    return lines.where((line) => line.accountName.value != null).map((line) {
+      log("=========== BUILD SNAPSHOTS ===========", name: "JOURNAL");
 
-          return JournalLineSnapshot(
-            accountName: line.accountName.value!,
-            accountType: accountType,
-            debit: double.tryParse(line.debitController.text) ?? 0,
-            credit: double.tryParse(line.creditController.text) ?? 0,
-          );
-        })
-        .toList();
+      for (final line in lines) {
+        log('''
+Account Name : ${line.accountName.value}
+Account Code : ${line.accountCode.value}
+Debit        : ${line.debitController.text}
+Credit       : ${line.creditController.text}
+''', name: "LINE");
+      }
+
+      log("=========== ALL ACCOUNTS ===========", name: "ACCOUNT");
+
+      for (final a in accounts) {
+        log('''
+Code : ${a.code}
+Name : ${a.name}
+Type : ${a.type}
+''', name: "ACCOUNT");
+      }
+      final matchedAccount = accounts.firstWhereOrNull(
+        (a) => a.code == line.accountCode.value,
+      );
+
+      return JournalLineSnapshot(
+        accountCode: line.accountCode.value!,
+        accountName: line.accountName.value!,
+        accountType: matchedAccount!.type,
+        debit: double.tryParse(line.debitController.text) ?? 0,
+        credit: double.tryParse(line.creditController.text) ?? 0,
+      );
+    }).toList();
   }
 
   JournalEntryModel _buildEntry(JournalStatus status) {
@@ -184,18 +192,18 @@ class NewJournalEntryController extends GetxController {
   }
 
   void postEntry() {
-  if (!canPost) return;
+    if (!canPost) return;
 
-  final entry = _buildEntry(JournalStatus.posted);
+    final entry = _buildEntry(JournalStatus.posted);
 
-  // Update account balances
-  AccountController.instance.postJournal(entry);
+    // Update account balances
+    AccountController.instance.postJournal(entry);
 
-  // Save journal
-  JournalController.instance.addEntry(entry);
+    // Save journal
+    JournalController.instance.addEntry(entry);
 
-  Get.back();
-}
+    Get.back();
+  }
 
   // void postEntry() {
   //   if (!canPost) return;

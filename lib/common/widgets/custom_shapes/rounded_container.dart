@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:quick_ledger/common/widgets/custom_shapes/colors.dart';
 import 'package:quick_ledger/common/widgets/custom_shapes/sizes.dart';
 
-import '../../../../utils/constants/colors.dart';
-import '../../../../utils/constants/sizes.dart';
 
 class URoundedContainer extends StatelessWidget {
   const URoundedContainer({super.key,

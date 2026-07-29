@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quick_ledger/common/style/padding.dart';
@@ -20,8 +19,8 @@ class NewAccountScreen extends StatelessWidget {
   /// that happened when different buttons used different Get.to()
   /// calls and only some of them carried the binding.
 
-  // final controller = Get.find<NewAccountController>();
-  final controller = Get.put(NewAccountController());
+  final controller = Get.find<NewAccountController>();
+  // final controller = Get.put(NewAccountController());
 
   @override
   Widget build(BuildContext context) {

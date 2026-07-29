@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
 import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
+import 'package:quick_ledger/features/ledger/model/accounts/account_model.dart';
 import 'package:quick_ledger/features/ledger/model/journal/journal_entries_model.dart';
 import 'package:quick_ledger/features/ledger/model/journal/journal_line_snapshot.dart';
 import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_line_model.dart';
@@ -51,8 +52,8 @@ class NewJournalEntryController extends GetxController {
   // ACCOUNT OPTIONS — real accounts, read live from AccountController
   // ============================================================
 
-  List<String> get accountOptions =>
-      AccountController.instance.allAccounts.map((a) => a.name).toList();
+  List<AccountModel> get accountOptions =>
+      AccountController.instance.allAccounts;
 
   // ============================================================
   // LINES — add/remove, one-field-active rule, live totals
@@ -137,37 +138,25 @@ class NewJournalEntryController extends GetxController {
   bool get canPost => isBalanced && lines.length >= 2;
 
   List<JournalLineSnapshot> _buildLineSnapshots() {
-    final accounts = AccountController.instance.allAccounts;
+    log("=========== BUILD SNAPSHOTS ===========", name: "JOURNAL");
 
-    return lines.where((line) => line.accountName.value != null).map((line) {
-      log("=========== BUILD SNAPSHOTS ===========", name: "JOURNAL");
+    return lines.where((line) => line.account.value != null).map((line) {
+      final account = line.account.value!;
 
-      for (final line in lines) {
-        log('''
-Account Name : ${line.accountName.value}
-Account Code : ${line.accountCode.value}
+      log('''
+Account ID   : ${account.id}
+Account Code : ${account.code}
+Account Name : ${account.name}
+Type         : ${account.type}
+Category     : ${account.category}
 Debit        : ${line.debitController.text}
 Credit       : ${line.creditController.text}
 ''', name: "LINE");
-      }
-
-      log("=========== ALL ACCOUNTS ===========", name: "ACCOUNT");
-
-      for (final a in accounts) {
-        log('''
-Code : ${a.code}
-Name : ${a.name}
-Type : ${a.type}
-''', name: "ACCOUNT");
-      }
-      final matchedAccount = accounts.firstWhereOrNull(
-        (a) => a.code == line.accountCode.value,
-      );
 
       return JournalLineSnapshot(
-        accountCode: line.accountCode.value!,
-        accountName: line.accountName.value!,
-        accountType: matchedAccount!.type,
+        accountCode: account.code,
+        accountName: account.name,
+        accountType: account.type,
         debit: double.tryParse(line.debitController.text) ?? 0,
         credit: double.tryParse(line.creditController.text) ?? 0,
       );

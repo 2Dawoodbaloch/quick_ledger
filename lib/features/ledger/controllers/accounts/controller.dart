@@ -86,47 +86,65 @@ class AccountController extends GetxController {
     return totalAssets - totalLiabilities;
   }
 
+  void postJournal(JournalEntryModel journal) {
+  log("========== POST JOURNAL ==========");
 
-void postJournal(JournalEntryModel journal) {
   for (final line in journal.lines) {
-    // Find the real account
+    // Find the account using its unique code
     final account = allAccounts.firstWhereOrNull(
-      (a) => a.name == line.accountName,
+      (a) => a.code == line.accountCode,
     );
 
     if (account == null) {
-      log("Account not found: ${line.accountName}");
+      log("❌ Account not found: ${line.accountCode}");
       continue;
     }
 
     log("--------------------------------");
-    log("Posting to: ${account.name}");
-    log("Type: ${account.type}");
-     log("code: ${account.code}");
-    log("Old Balance: ${account.balance}");
-    log("Debit: ${line.debit}");
-    log("Credit: ${line.credit}");
+    log("Posting Account : ${account.name}");
+    log("Code            : ${account.code}");
+    log("Type            : ${account.type}");
+    log("Old Balance     : ${account.balance}");
+    log("Debit           : ${line.debit}");
+    log("Credit          : ${line.credit}");
 
     switch (account.type) {
+      // Assets: Debit ↑ Credit ↓
       case AccountType.asset:
         account.balance += line.debit;
         account.balance -= line.credit;
         break;
 
-      case AccountType.income:
-        account.balance -= line.debit;
+      // Liabilities: Credit ↑ Debit ↓
+      case AccountType.liability:
         account.balance += line.credit;
+        account.balance -= line.debit;
         break;
 
-      default:
-        // We'll implement these later
+      // Equity: Credit ↑ Debit ↓
+      case AccountType.equity:
+        account.balance += line.credit;
+        account.balance -= line.debit;
+        break;
+
+      // Income: Credit ↑ Debit ↓
+      case AccountType.income:
+        account.balance += line.credit;
+        account.balance -= line.debit;
+        break;
+
+      // Expenses: Debit ↑ Credit ↓
+      case AccountType.expense:
+        account.balance += line.debit;
+        account.balance -= line.credit;
         break;
     }
 
-    log("New Balance: ${account.balance}");
+    log("New Balance     : ${account.balance}");
   }
 
-  // Notify GetX that balances changed
   allAccounts.refresh();
+
+  log("========== POSTING COMPLETE ==========");
 }
 }

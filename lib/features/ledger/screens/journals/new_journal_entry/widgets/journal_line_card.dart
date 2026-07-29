@@ -1,19 +1,13 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
+import 'package:quick_ledger/features/ledger/model/accounts/account_model.dart';
 import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_line_model.dart';
 import 'package:quick_ledger/utils/constants/colors.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/constants/text_strings.dart';
 import 'package:quick_ledger/utils/helpers/helper_functions.dart';
 
-/// One line in the Lines section: account name, then Debit/Credit
-/// side by side. Presentational except for direct binding to the
-/// line's own Rx/TextEditingController — those already live on the
-/// model itself, so this widget doesn't need extra callbacks wired
-/// through the controller for every keystroke.
 class GJournalLineCard extends StatelessWidget {
   const GJournalLineCard({
     super.key,
@@ -23,7 +17,7 @@ class GJournalLineCard extends StatelessWidget {
   });
 
   final JournalLineModel line;
-  final List<String> accountOptions;
+  final List<AccountModel> accountOptions;
   final VoidCallback? onRemove;
 
   @override
@@ -48,27 +42,21 @@ class GJournalLineCard extends StatelessWidget {
               Expanded(
                 child: Obx(
                   () => DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
+                    child: DropdownButton<AccountModel>(
                       isExpanded: true,
                       hint: const Text('Select account'),
-                      value: line.accountName.value,
-                      items: accountOptions
-                          .map(
-                            (name) => DropdownMenuItem(
-                              value: name,
-                              child: Text(name),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (value) {
-                        final account = AccountController.instance.allAccounts
-                            .firstWhere((a) => a.name == value);
-
-                        line.accountName.value = account.name;
-                        line.accountCode.value = account.code;
+                      value: line.account.value,
+                      items: accountOptions.map((account) {
+                        return DropdownMenuItem<AccountModel>(
+                          value:account,
+                          child: Text(account.name),
+                        );
+                      }).toList(),
+                      onChanged: (account) {
+                        line.account.value = account;
 
                         log(
-                          "Selected Account -> ${account.name} (${account.code})",
+                          "Selected ${account!.name} (${account.code})",
                           name: "DROPDOWN",
                         );
                       },

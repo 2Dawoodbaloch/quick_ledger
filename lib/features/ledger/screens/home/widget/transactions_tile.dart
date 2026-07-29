@@ -4,11 +4,6 @@ import 'package:quick_ledger/utils/constants/colors.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/helpers/helper_functions.dart';
 
-/// One row in the recent transactions list. Uses Card (picks up
-/// GCardTheme automatically) wrapping a ListTile — leading is a
-/// direction icon in a tinted circle, title is the transaction name,
-/// trailing is the signed amount, colored green/red to match
-/// GColors.income / GColors.expense used everywhere else in the app.
 class GTransactionTile extends StatelessWidget {
   const GTransactionTile({
     super.key,

@@ -23,7 +23,10 @@ class JournalEntryDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currencyFormat = NumberFormat.currency(symbol: '\$', decimalDigits: 0);
+    final currencyFormat = NumberFormat.currency(
+      symbol: '\$',
+      decimalDigits: 0,
+    );
     final dateFormat = DateFormat('MMM d, yyyy');
 
     return Scaffold(
@@ -53,8 +56,14 @@ class JournalEntryDetailScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Narration', style: Theme.of(context).textTheme.labelMedium),
-                      Text(entry.narration, style: Theme.of(context).textTheme.bodyLarge),
+                      Text(
+                        'Narration',
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                      Text(
+                        entry.narration,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
                       const SizedBox(height: GSizes.spaceBtwItems),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,14 +71,23 @@ class JournalEntryDetailScreen extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Date', style: Theme.of(context).textTheme.labelMedium),
-                              Text(dateFormat.format(entry.date), style: Theme.of(context).textTheme.bodyMedium),
+                              Text(
+                                'Date',
+                                style: Theme.of(context).textTheme.labelMedium,
+                              ),
+                              Text(
+                                dateFormat.format(entry.date),
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
                             ],
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text('Total', style: Theme.of(context).textTheme.labelMedium),
+                              Text(
+                                'Total',
+                                style: Theme.of(context).textTheme.labelMedium,
+                              ),
                               Text(
                                 currencyFormat.format(entry.amount),
                                 style: Theme.of(context).textTheme.titleSmall,
@@ -101,7 +119,11 @@ class JournalEntryDetailScreen extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.info_outline, size: GSizes.iconSm, color: Theme.of(context).textTheme.bodySmall?.color),
+                      Icon(
+                        Icons.info_outline,
+                        size: GSizes.iconSm,
+                        color: Theme.of(context).textTheme.bodySmall?.color,
+                      ),
                       const SizedBox(width: GSizes.xs),
                       Expanded(
                         child: Text(
@@ -114,39 +136,51 @@ class JournalEntryDetailScreen extends StatelessWidget {
                 )
               else
                 ...entry.lines.map((line) {
-                final isDebit = line.debit > 0;
-                final amount = isDebit ? line.debit : line.credit;
+                  final isDebit = line.debit > 0;
+                  final amount = isDebit ? line.debit : line.credit;
 
-                return Container(
-                  margin: const EdgeInsets.only(bottom: GSizes.spaceBtwItems),
-                  padding: const EdgeInsets.symmetric(horizontal: GSizes.md, vertical: GSizes.sm),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).cardTheme.color,
-                    borderRadius: BorderRadius.circular(GSizes.cardRadiusSm),
-                    border: Border.all(color: Theme.of(context).dividerColor, width: 0.5),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                        Text(line.accountCode, style: Theme.of(context).textTheme.bodyLarge),
-                      Text(line.accountType.label),
-                      Text(line.accountName, style: Theme.of(context).textTheme.bodyLarge),
-                      
-                      Text(
-                        '${isDebit ? 'Dr' : 'Cr'} ${currencyFormat.format(amount)}',
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          // Dr in green, Cr in red — purely a visual
-                          // distinction to scan quickly, not a
-                          // statement about income vs expense.
-                          color: isDebit ? GColors.income : GColors.expense,
-                        ),
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: GSizes.spaceBtwItems),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: GSizes.md,
+                      vertical: GSizes.sm,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardTheme.color,
+                      borderRadius: BorderRadius.circular(GSizes.cardRadiusSm),
+                      border: Border.all(
+                        color: Theme.of(context).dividerColor,
+                        width: 0.5,
                       ),
-                    ],
-                  ),
-                );
-              }),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          line.accountCode,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        Text(line.accountType.label),
+                        Text(
+                          line.accountName,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+
+                        Text(
+                          '${isDebit ? 'Dr' : 'Cr'} ${currencyFormat.format(amount)}',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            // Dr in green, Cr in red — purely a visual
+                            // distinction to scan quickly, not a
+                            // statement about income vs expense.
+                            color: isDebit ? GColors.income : GColors.expense,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
 
               const SizedBox(height: GSizes.spaceBtwSections),
 

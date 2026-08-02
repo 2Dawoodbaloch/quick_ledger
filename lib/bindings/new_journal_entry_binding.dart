@@ -6,6 +6,5 @@ class NewJournalEntryBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<NewJournalEntryController>(() => NewJournalEntryController());
-    // Get.put(NewJournalEntryController());
   }
 }

@@ -57,6 +57,7 @@ class GSizes {
   // CARD
   // ============================================================
   static const double cardRadiusSm = 12.0;
+    static const double cardRadiusMd = 14.0;
   static const double cardRadiusLg = 16.0;
   static const double cardElevation = 0.0; // flat design per mockups
 

@@ -65,17 +65,19 @@ class NewAccountController extends GetxController {
       type: selectedType.value,
       // Empty opening balance defaults to 0 rather than crashing on
       // double.parse — a brand-new account commonly starts at zero.
-      balance: double.tryParse(openingBalanceController.text.trim()) ?? 0,
+      openingBalance: double.tryParse(openingBalanceController.text.trim()) ?? 0,
       description: descriptionController.text.trim().isEmpty
           ? null
           : descriptionController.text.trim(),
     );
    
     log(
+      "account id : ${account.id}"
       "Code : ${account.code}"
       "Name: ${account.name}, "
       "Type: ${account.type}, "
-      "Category: ${account.category}",
+      "Category: ${account.category}"
+      "opening balance : ${account.openingBalance}"
     );
     AccountController.instance.addAccount(account);
     Get.back();

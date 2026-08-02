@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quick_ledger/common/widgets/screens/empty_state.dart';
 import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/reports/reports_controller.dart';
 import 'package:quick_ledger/features/ledger/screens/accounts/new_accounts/new_accounts.dart';
+import 'package:quick_ledger/features/ledger/screens/reports/widgets/report_card.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/constants/text_strings.dart';
 
@@ -13,6 +15,7 @@ class ReportsScreen extends StatelessWidget {
   ReportsScreen({super.key});
 
   final controller = Get.find<AccountController>();
+  final reportController = Get.find<ReportsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +51,7 @@ class ReportsScreen extends StatelessWidget {
                         subtitle: GTexts.noAccountsSubtitle,
                         buttonLabel: '+ ${GTexts.newAccount}',
                         secondaryLabel: GTexts.useStarterTemplate,
-                        onSecondaryTap: () {
-                       
-                        },
+                        onSecondaryTap: () {},
                         onButtonTap: () {
                           Get.to(() => NewAccountScreen());
                           // Get.toNamed(RoutesName.newAccounts);
@@ -60,7 +61,17 @@ class ReportsScreen extends StatelessWidget {
                   );
                 }
 
-                return Container();
+                return ListView.separated(
+                  padding: const EdgeInsets.only(
+                    bottom: GSizes.centerFabSize + GSizes.lg,
+                  ),
+                  itemCount: reportController.reports.length,
+                  itemBuilder: (_, index) {
+                    return GReportCard(report: reportController.reports[index]);
+                  },
+                  separatorBuilder: (_, __) =>
+                      const SizedBox(height: GSizes.spaceBtwItems),
+                );
               }),
             ),
           ],

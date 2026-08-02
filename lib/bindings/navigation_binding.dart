@@ -4,6 +4,8 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
 import 'package:quick_ledger/features/ledger/controllers/home/controller.dart';
 import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/reports/profit_loss/profit_loss_controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/reports/reports_controller.dart';
 
 class NavigationBinding extends Bindings {
   @override
@@ -11,5 +13,7 @@ class NavigationBinding extends Bindings {
     Get.lazyPut<HomeController>(() => HomeController());
     Get.lazyPut<AccountController>(() => AccountController());
     Get.lazyPut<JournalController>(() => JournalController());
+    Get.lazyPut<ReportsController>(() => ReportsController());
+     Get.lazyPut<ProfitLossController>(() => ProfitLossController());
   }
 }

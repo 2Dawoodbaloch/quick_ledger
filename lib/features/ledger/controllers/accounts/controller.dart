@@ -38,7 +38,7 @@ class AccountController extends GetxController {
         "Name: ${a.name} | "
         "Type: ${a.type} | "
         "Category: ${a.category} | "
-        "Balance: ${a.balance}",
+        "Balance: ${a.currentBalance}",
       );
     }
 
@@ -52,7 +52,7 @@ class AccountController extends GetxController {
   double _totalForCategory(AccountCategory category) {
     return allAccounts
         .where((a) => a.category == category)
-        .fold(0.0, (sum, a) => sum + a.balance);
+        .fold(0.0, (sum, a) => sum + a.currentBalance);
   }
 
   List<AccountModel> get cashAccounts =>
@@ -79,10 +79,10 @@ class AccountController extends GetxController {
   double get netAssets {
     final totalAssets = allAccounts
         .where((a) => a.type == AccountType.asset)
-        .fold(0.0, (s, a) => s + a.balance);
+        .fold(0.0, (s, a) => s + a.currentBalance);
     final totalLiabilities = allAccounts
         .where((a) => a.type == AccountType.liability)
-        .fold(0.0, (s, a) => s + a.balance);
+        .fold(0.0, (s, a) => s + a.currentBalance);
     return totalAssets - totalLiabilities;
   }
 
@@ -104,43 +104,43 @@ class AccountController extends GetxController {
     log("Posting Account : ${account.name}");
     log("Code            : ${account.code}");
     log("Type            : ${account.type}");
-    log("Old Balance     : ${account.balance}");
+    log("Old Balance     : ${account.currentBalance}");
     log("Debit           : ${line.debit}");
     log("Credit          : ${line.credit}");
 
     switch (account.type) {
       // Assets: Debit ↑ Credit ↓
       case AccountType.asset:
-        account.balance += line.debit;
-        account.balance -= line.credit;
+        account.currentBalance += line.debit;
+        account.currentBalance -= line.credit;
         break;
 
       // Liabilities: Credit ↑ Debit ↓
       case AccountType.liability:
-        account.balance += line.credit;
-        account.balance -= line.debit;
+        account.currentBalance += line.credit;
+        account.currentBalance -= line.debit;
         break;
 
       // Equity: Credit ↑ Debit ↓
       case AccountType.equity:
-        account.balance += line.credit;
-        account.balance -= line.debit;
+        account.currentBalance += line.credit;
+        account.currentBalance -= line.debit;
         break;
 
       // Income: Credit ↑ Debit ↓
       case AccountType.income:
-        account.balance += line.credit;
-        account.balance -= line.debit;
+        account.currentBalance += line.credit;
+        account.currentBalance -= line.debit;
         break;
 
       // Expenses: Debit ↑ Credit ↓
       case AccountType.expense:
-        account.balance += line.debit;
-        account.balance -= line.credit;
+        account.currentBalance += line.debit;
+        account.currentBalance -= line.credit;
         break;
     }
 
-    log("New Balance     : ${account.balance}");
+    log("New Balance     : ${account.currentBalance}");
   }
 
   allAccounts.refresh();

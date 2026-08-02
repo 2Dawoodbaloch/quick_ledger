@@ -109,7 +109,7 @@ class GAccountTile extends StatelessWidget {
               ),
 
               Text(
-                '\$${account.balance.toStringAsFixed(0)}',
+                '\$${account.currentBalance.toStringAsFixed(0)}',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ],

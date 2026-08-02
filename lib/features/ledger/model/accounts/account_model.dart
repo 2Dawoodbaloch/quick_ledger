@@ -6,16 +6,18 @@ class AccountModel {
   final String code;
   final AccountType type;
   final AccountCategory category;
-  double balance;
   final String? description;
+  double currentBalance;
+  final double openingBalance;
 
   AccountModel({
+    required this.openingBalance,
     required this.id,
     required this.name,
     required this.code,
     required this.type,
     required this.category,
-    required this.balance,
     this.description,
-  });
+  }) : currentBalance = openingBalance;
 }
+

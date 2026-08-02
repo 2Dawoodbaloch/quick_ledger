@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:quick_ledger/common/widgets/screens/empty_state.dart';
 import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
 import 'package:quick_ledger/features/ledger/controllers/home/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/reports/profit_loss/profit_loss_controller.dart';
 import 'package:quick_ledger/features/ledger/screens/home/widget/account_balance_title.dart';
 import 'package:quick_ledger/features/ledger/screens/home/widget/balance_card.dart';
 import 'package:quick_ledger/features/ledger/screens/home/widget/home_header.dart';
@@ -18,7 +19,7 @@ import 'package:quick_ledger/utils/constants/text_strings.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
-
+  final profitController = Get.find<ProfitLossController>();
   final controller = Get.find<HomeController>();
   final accountController = AccountController.instance;
   final currency = NumberFormat.currency(symbol: 'RS', decimalDigits: 0);
@@ -31,7 +32,7 @@ class HomeScreen extends StatelessWidget {
       log(
         "${account.name} | "
         "${account.category} | "
-        "${account.balance}",
+        "${account.currentBalance}",
       );
     }
 
@@ -91,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                     ...cashAccounts.map(
                       (account) => GAccountBalanceTile(
                         name: account.name,
-                        amount: "RS${account.balance.toStringAsFixed(0)}",
+                        amount: "RS${account.currentBalance.toStringAsFixed(0)}",
                       ),
                     ),
                   ],
@@ -122,7 +123,7 @@ class HomeScreen extends StatelessWidget {
                     ...bankAccounts.map(
                       (account) => GAccountBalanceTile(
                         name: account.name,
-                        amount: "RS${account.balance.toStringAsFixed(0)}",
+                        amount: "RS${account.currentBalance.toStringAsFixed(0)}",
                       ),
                     ),
                   ],
@@ -144,9 +145,9 @@ class HomeScreen extends StatelessWidget {
               /// Income Expense Profit
               Obx(
                 () => GSummaryRow(
-                  income: currency.format(controller.income.value),
-                  expense: currency.format(controller.expense.value),
-                  profit: currency.format(controller.profit.value),
+                  income: currency.format(profitController.totalIncome),
+                  expense: currency.format(profitController.totalExpense),
+                  profit: currency.format(profitController.netProfit),
                 ),
               ),
 

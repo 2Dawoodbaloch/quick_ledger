@@ -6,6 +6,7 @@ import 'package:quick_ledger/utils/constants/enum.dart';
 /// Asset?), Profit & Loss and Trial Balance can't be computed
 /// correctly, only guessed at.
 class JournalLineSnapshot {
+  final String accountId;
   final String accountName;
   final AccountType accountType;
   final double debit;
@@ -13,6 +14,7 @@ class JournalLineSnapshot {
   final String accountCode;
 
   JournalLineSnapshot({
+    required this.accountId,
     required this.accountCode,
     required this.accountName,
     required this.accountType,

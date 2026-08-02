@@ -18,4 +18,13 @@ class RoutesName {
   // accounts
   static const String accounts = '/accounts screen';
   static const String newAccounts = '/new-accounts-screen';
+
+  // report
+  static const String reports = '/reprots-screen';
+  static const String generalLedger = '/general-ledger-screen';
+  static const String generalLedgerDetailScreen =
+      '/general-ledger-detail-screen';
+  static const String trialBalance = '/trial-balance-screen';
+static const String profitLoss = '/profit-balance-screen';
+static const String balanceSheet = '/balance-sheet-screen';
 }

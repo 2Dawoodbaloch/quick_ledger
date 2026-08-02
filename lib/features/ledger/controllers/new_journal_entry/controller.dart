@@ -154,6 +154,7 @@ Credit       : ${line.creditController.text}
 ''', name: "LINE");
 
       return JournalLineSnapshot(
+        accountId: account.id,
         accountCode: account.code,
         accountName: account.name,
         accountType: account.type,

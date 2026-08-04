@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/route_manager.dart';
 import 'package:intl/intl.dart';
 import 'package:quick_ledger/common/widgets/screens/empty_state.dart';
 import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
@@ -14,6 +15,8 @@ import 'package:quick_ledger/features/ledger/screens/home/widget/balance_card.da
 import 'package:quick_ledger/features/ledger/screens/home/widget/home_header.dart';
 import 'package:quick_ledger/features/ledger/screens/home/widget/recent_transactions_list.dart';
 import 'package:quick_ledger/features/ledger/screens/home/widget/summary_row.dart';
+import 'package:quick_ledger/features/personalization/controllers/user_controller.dart';
+import 'package:quick_ledger/features/personalization/profiles/profile_screen.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/constants/text_strings.dart';
 
@@ -22,10 +25,16 @@ class HomeScreen extends StatelessWidget {
   final profitController = Get.find<ProfitLossController>();
   final controller = Get.find<HomeController>();
   final accountController = AccountController.instance;
+
   final currency = NumberFormat.currency(symbol: 'RS', decimalDigits: 0);
 
   @override
   Widget build(BuildContext context) {
+    final userController = Get.put(
+      UserController(),
+    ); // use Get.put becasue we use this first time
+    // now if in profile user controller needed use final controller = UserController.instance;
+    // becuuse we already in home intilized it .
     log("------ DASHBOARD ------");
 
     for (final account in accountController.allAccounts) {
@@ -50,9 +59,11 @@ class HomeScreen extends StatelessWidget {
               Obx(
                 () => GHomeHeader(
                   greeting: controller.greeting,
-                  userName: controller.userName.value,
+                  userName: userController.user.value.name,
                   subtitle: GTexts.ledgerOverview,
-                  onAvatarTap: () {},
+                  onTap: () {
+                    Get.to(ProfileScreen());
+                  },
                 ),
               ),
 
@@ -71,7 +82,6 @@ class HomeScreen extends StatelessWidget {
 
               Obx(() {
                 final cashAccounts = accountController.cashAccounts;
-                 
 
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +102,8 @@ class HomeScreen extends StatelessWidget {
                     ...cashAccounts.map(
                       (account) => GAccountBalanceTile(
                         name: account.name,
-                        amount: "RS${account.currentBalance.toStringAsFixed(0)}",
+                        amount:
+                            "RS${account.currentBalance.toStringAsFixed(0)}",
                       ),
                     ),
                   ],
@@ -103,7 +114,7 @@ class HomeScreen extends StatelessWidget {
 
               Obx(() {
                 final bankAccounts = accountController.bankAccounts;
-                
+
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -123,7 +134,8 @@ class HomeScreen extends StatelessWidget {
                     ...bankAccounts.map(
                       (account) => GAccountBalanceTile(
                         name: account.name,
-                        amount: "RS${account.currentBalance.toStringAsFixed(0)}",
+                        amount:
+                            "RS${account.currentBalance.toStringAsFixed(0)}",
                       ),
                     ),
                   ],

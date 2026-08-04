@@ -13,7 +13,7 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false,),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: GPadding.screenPadding,
@@ -36,7 +36,7 @@ class SignUpScreen extends StatelessWidget {
 
                Text(
                 GTexts.signUpSubtitle,
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               SizedBox(height: GSizes.spaceBtwSections),
 
@@ -46,7 +46,7 @@ class SignUpScreen extends StatelessWidget {
               SizedBox(height: GSizes.spaceBtwSections),
 
               ///divider
-              GFormDivider(title: GTexts.logIn),
+              GFormDivider(title: GTexts.logIn,),
               SizedBox(height: GSizes.spaceBtwSections),
 
               ///footer

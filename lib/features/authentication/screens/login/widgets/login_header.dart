@@ -19,7 +19,7 @@ class GLoginHeader extends StatelessWidget {
         SizedBox(height: GSizes.xs),
         Text(
          GTexts.logInSubtitle,
-          style: Theme.of(context).textTheme.bodySmall,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
       ],
     );

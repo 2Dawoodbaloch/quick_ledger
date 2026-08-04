@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quick_ledger/features/ledger/controllers/reports/general_ledger/general_ledger_controller.dart';
-import 'package:quick_ledger/features/ledger/screens/reports/general_ledger/general_ledger_detail_screen.dart';
 import 'package:quick_ledger/features/ledger/screens/reports/general_ledger/widget/general_ledger_card.dart';
 import 'package:quick_ledger/routes/routes_name.dart';
 
@@ -29,10 +28,10 @@ class GeneralLedgerScreen extends StatelessWidget {
             return GGeneralLedgerCard(
               item: item,
               onTap: () {
-               Get.toNamed(
-  RoutesName.generalLedgerDetailScreen,
-  arguments: item.accountId,
-);
+                Get.toNamed(
+                  RoutesName.generalLedgerDetailScreen,
+                  arguments: item.accountId,
+                );
               },
             );
           },

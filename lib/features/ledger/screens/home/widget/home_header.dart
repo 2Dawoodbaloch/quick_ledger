@@ -14,13 +14,13 @@ class GHomeHeader extends StatelessWidget {
     required this.greeting,
     required this.userName,
     required this.subtitle,
-    this.onAvatarTap,
+    this.onTap,
   });
 
   final String greeting;
   final String userName;
   final String subtitle;
-  final VoidCallback? onAvatarTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class GHomeHeader extends StatelessWidget {
         ),
         const SizedBox(width: GSizes.sm),
         GestureDetector(
-          onTap: onAvatarTap,
+          onTap: onTap,
           child: CircleAvatar(
             radius: 19,
             backgroundColor: GColors.primaryLight,

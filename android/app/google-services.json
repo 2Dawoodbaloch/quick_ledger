@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "722178177690",
+    "project_id": "quick-ledger-app",
+    "storage_bucket": "quick-ledger-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722178177690:android:bf54a80847bc0b3ea6bd23",
+        "android_client_info": {
+          "package_name": "com.example.quick_ledger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArYb0liuHdJRd6U_rvRQnhGtlMoin4GD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

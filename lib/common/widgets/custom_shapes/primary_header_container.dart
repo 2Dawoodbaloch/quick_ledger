@@ -4,8 +4,8 @@ import 'package:quick_ledger/common/widgets/custom_shapes/colors.dart';
 import 'package:quick_ledger/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:quick_ledger/common/widgets/custom_shapes/sizes.dart';
 
-class UPrimaryHeaderContainer extends StatelessWidget {
-  const UPrimaryHeaderContainer({
+class GPrimaryHeaderContainer extends StatelessWidget {
+  const GPrimaryHeaderContainer({
     super.key,
     required this.child,
     required this.height,
@@ -14,7 +14,7 @@ class UPrimaryHeaderContainer extends StatelessWidget {
   final double height;
   @override
   Widget build(BuildContext context) {
-    return URoundedContainer(
+    return GRoundedContainer(
       child: Container(
         height: height,
         color: UColors.primary,

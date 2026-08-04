@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../constants/colors.dart';
-import '../helpers/helper_functions.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:quick_ledger/utils/constants/colors.dart';
+import 'package:quick_ledger/utils/helpers/helper_functions.dart';
 
 class GFullScreenLoader {
   static void openLoadingDialog(String text) {
@@ -11,18 +12,13 @@ class GFullScreenLoader {
       builder: (_) => PopScope(
         canPop: false,
         child: Container(
-          color: GHelperFunctions.isDarkMode(Get.context!)
-              ? GColors.dark
-              : GColors.white,
+          color: GHelperFunctions.isDarkMode(Get.context!) ? GColors.dark : GColors.white,
           width: double.infinity,
           height: double.infinity,
           child: Column(
             children: [
-              /// Extra Space
-              const SizedBox(height: 250),
-
-              /// Animation
-              Text(text)
+              const SizedBox(height: 100),
+              Text(text, style: const TextStyle(fontSize: 25)),
             ],
           ),
         ),
@@ -30,7 +26,9 @@ class GFullScreenLoader {
     );
   }
 
-  static void stopLoading() {
-    Navigator.of(Get.overlayContext!).pop();
+ static void stopLoading() {
+  if (Get.isDialogOpen ?? false) {
+    Get.back();
   }
+}
 }

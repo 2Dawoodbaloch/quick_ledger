@@ -3,28 +3,24 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:quick_ledger/common/widgets/buttons/elevated_button.dart';
 import 'package:quick_ledger/features/authentication/controllers/login/login_controller.dart';
-import 'package:quick_ledger/features/authentication/screens/signup/signup.dart';
+import 'package:quick_ledger/features/authentication/screens/forget_password/forget_password.dart';
+import 'package:quick_ledger/routes/routes_name.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/constants/text_strings.dart';
 import 'package:quick_ledger/utils/validators/validation.dart';
 
-// ignore: must_be_immutable
 class GLoginForm extends StatelessWidget {
   GLoginForm({super.key});
-
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     final controller = LoginController.instance;
     return Form(
-      // key: controller.loginFormKey,
+      key: controller.loginFormKey,
       child: Column(
         children: [
           /// email
           TextFormField(
-            controller: email,
+            controller: controller.email,
             validator: (value) => GValidator.validateEmail(value),
             decoration: InputDecoration(
               prefixIcon: Icon(Iconsax.direct_right),
@@ -35,20 +31,19 @@ class GLoginForm extends StatelessWidget {
 
           /// password
           TextFormField(
-            controller: password,
+            controller: controller.password,
             validator: (value) =>
                 GValidator.validateEmptyText('Password', value),
             obscureText: controller.isPasswordVisible.value,
             decoration: InputDecoration(
               prefixIcon: Icon(Iconsax.lock),
-
+              labelText: GTexts.password,
               suffixIcon: IconButton(
-                icon: Icon(
+                icon: Obx(() => Icon(
                   controller.isPasswordVisible.value
                       ? Iconsax.eye_slash
                       : Iconsax.eye,
-               
-                ),
+                ),),
                 onPressed: () {
                   controller.isPasswordVisible.toggle();
                 },
@@ -57,32 +52,47 @@ class GLoginForm extends StatelessWidget {
           ),
 
           SizedBox(height: GSizes.spaceBtwInputFields),
-
-          /// forgotten password
+ /// remember me
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextButton(onPressed: () {}, child: Text(GTexts.forgotPassword)),
+              Obx(
+                () => Checkbox(
+                  value: controller.rememberMe.value,
+                  onChanged: (value) {
+                    controller.rememberMe.toggle();
+                  },
+                ),
+              ),
+              Text(GTexts.rememberMe),
+
+              /// forgotten password
+              TextButton(
+                onPressed: () {
+                  Get.to(() => ForgetPassword());
+                },
+                child: Text(GTexts.forgotPassword),
+              ),
             ],
           ),
+
+    
           SizedBox(height: GSizes.spaceBtwSections),
 
           /// sign In
           GElevatedButton(
             onPressed: controller.loginWithEMailAndPassword,
-     
             child: Text(GTexts.logIn),
           ),
           SizedBox(height: GSizes.spaceBtwItems / 2),
-
           /// Create Account
           SizedBox(
             width: double.infinity,
-            child: OutlinedButton(
+            child: GElevatedButton(
               onPressed: () {
-                Get.to(SignUpScreen());
+                Get.toNamed(RoutesName.signup);
               },
-              child: Text(GTexts.createAccount),
+              child: Text("Create an account"),
             ),
           ),
         ],

@@ -16,19 +16,19 @@ class GFormDivider extends StatelessWidget {
           child: Divider(
             indent: 60,
             endIndent: 5,
-            thickness: 0.5,
+            thickness: 1.0,
     
-            color: dark ? GColors.darkGrey : GColors.grey,
+            color: dark ? GColors.darkGrey : GColors.dark
           ),
         ),
-        Text(title, style: Theme.of(context).textTheme.labelMedium),
+        Text(title, style: Theme.of(context).textTheme.labelLarge),
         Expanded(
           child: Divider(
             indent: 5,
             endIndent: 60,
-            thickness: 0.5,
+            thickness: 1.0,
    
-            color: dark ? GColors.darkGrey : GColors.grey,
+            color: dark ? GColors.darkGrey : GColors.dark,
           ),
         ),
       ],

@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:quick_ledger/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:quick_ledger/utils/constants/colors.dart';
 import 'package:quick_ledger/utils/constants/text_strings.dart';
 import 'package:quick_ledger/utils/helpers/helper_functions.dart';
 
-class UPrivacyPolicyCheckBox extends StatelessWidget {
-  const UPrivacyPolicyCheckBox({super.key});
+class GPrivacyPolicyCheckBox extends StatelessWidget {
+  const GPrivacyPolicyCheckBox({super.key});
 
   @override
   Widget build(BuildContext context) {
     final dark = GHelperFunctions.isDarkMode(context);
-    // final controller = SignupController.Instance;
+    final controller = SignupController.instance;
     return Row(
       children: [
-    Checkbox(
-            value: true,
-            onChanged: (value){}),
-        
+        Obx(
+          () => Checkbox(
+            value: controller.privacyPolicy.value,
+            onChanged: (value) {
+              controller.privacyPolicy.value = value ?? false;
+            },
+          ),
+        ),
+
         RichText(
           text: TextSpan(
             style: Theme.of(context).textTheme.bodyMedium,

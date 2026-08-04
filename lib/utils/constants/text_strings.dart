@@ -4,8 +4,6 @@
 class GTexts {
   GTexts._();
 
-
-
   // ============================================================
   // LOGIN
   // ============================================================
@@ -23,25 +21,54 @@ class GTexts {
   static const String rememberMe = "remember Me";
   static const String dontHaveAccount = "Don't have an account?";
   static const String signUp = 'Sign up';
- 
+
   // ============================================================
   // SIGNUP
   // ============================================================
   static const String createYourAccount = 'Create your account';
   static const String signUpSubtitle = 'Set up your ledger in a few steps';
- 
+
+  // Forget Password Screen
+  static const String forgetPasswordTitle = 'Forget Password';
+  static const String forgetPasswordSubTitle =
+      'No worries! Enter your registered email address, and we’ll help you reset your password';
+  static const String submit = 'Submit';
+
+  // Reset Password Screen
+  static const String resetPasswordTitle = 'Password Reset Email Sent';
+  static const String resetPasswordSubTitle =
+      'We’ve sent a password reset link to your email. Please check your inbox and follow the instructions to reset your password';
+  static const String done = 'Done';
+
+  // Verify Email Screen
+  static const String verifyEmailTitle = 'Verify your email address!';
+  static const String verifyEmailSubTitle =
+      'We’ve sent a verification link to your email. Please check your inbox and click the link to verify your account';
+  static const String uContinue = 'Continue';
+  static const String resendEmail = 'Resend Email';
+
+  // Account Created Successfully Screen
+  static const String accountCreatedTitle = 'Your account successfully created';
+  static const String accountCreatedSubTitle =
+      'Congratulations! Your account has been successfully created. You can now explore all the amazing features, start personalizing your experience, and enjoy seamless access to our services. Let’s get started!';
+
+  static const String homeAppBarTitle = 'Good Morning';
+  static const String homeAppBarSubTitle = 'Unknown Pro';
+  static const String searchBarTitle = 'Search in Store';
+  static const String popularCategories = 'Popular Categories';
+
   // Personal details
   static const String fullName = 'Full name';
   static const String fullNameHint = 'Ahmed Raza';
   static const String phoneNumber = 'Phone number';
   static const String phoneNumberHint = '+92 300 1234567';
- 
+
   // Business details
   static const String businessDetails = 'Business details';
   static const String businessName = 'Business name';
   static const String businessNameHint = 'Raza Traders';
   static const String businessType = 'Business type';
- 
+
   // Business type options — kept as a list here; consider promoting
   // to a BusinessType enum once this feeds real logic (e.g. choosing
   // a starter Chart of Accounts template per business type)
@@ -52,13 +79,13 @@ class GTexts {
     'Wholesale / trading',
     'Other',
   ];
- 
+
   static const String privacyPolicy = 'Privacy Policy';
   static const String and = 'and';
   static const String termsOfUse = 'Terms of use';
   static const String createAccount = 'Create account';
   static const String alreadyHaveAccount = 'Already have an account?';
- 
+
   // ============================================================
   // VALIDATION MESSAGES
   // ============================================================

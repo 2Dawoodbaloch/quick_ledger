@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserModel {
-  final int id;
+  final String id;
   final String name;
   final String email;
   final String phone;
@@ -15,15 +17,23 @@ class UserModel {
     required this.businessType,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-      id: json['id'],
-      name: json['name'],
-      email: json['email'],
-      phone: json['phone'],
-      businessName: json['business_name'],
-      businessType: json['business_type'],
-    );
+
+  factory UserModel.fromSnapshot(
+    DocumentSnapshot<Map<String, dynamic>> document,
+  ) {
+    if (document.data() != null) {
+      final data = document.data()!;
+      return UserModel(
+        id: document.id,
+        name: data['name'] ?? '',
+        email: data['email'] ?? '',
+        phone: data['phoneNumber'] ?? '',
+        businessName: data['businessName'] ?? '',
+        businessType: data['businessType'] ?? '',
+      );
+    } else {
+      return UserModel.empty();
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -36,4 +46,25 @@ class UserModel {
       "business_type": businessType,
     };
   }
+
+  /// static function to create an empty user model
+  static UserModel empty() => UserModel(
+    id: "",
+    name: "",
+    email: "",
+    phone: "",
+    businessName: "",
+    businessType: "",
+  );
+
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+  return UserModel(
+    id: json['id'] ?? '',
+    name: json['name'] ?? '',
+    email: json['email'] ?? '',
+    phone: json['phone'] ?? '',
+    businessName: json['business_name'] ?? json['businessName'] ?? '',
+    businessType: json['business_type'] ?? json['businessType'] ?? '',
+  );
+}
 }

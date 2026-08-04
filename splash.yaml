@@ -1,0 +1,15 @@
+flutter_native_splash:
+color : "#FFFFFF" # white color
+color_dark: "#000000" # black color
+image: assets/logo/ledger.png
+image_dark: assets/logo/ledger.png
+
+android_12:
+color : "#FFFFFF" # white color
+color_dark: "#000000" # black color
+image: assets/logo/ledger.png
+image_dark: assets/logo/ledger.png
+
+web:false
+
+

@@ -205,9 +205,5 @@ class JournalEntryDetailScreen extends StatelessWidget {
   }
 
   void _reverseEntry(BuildContext context) {
-    // TODO: build the actual reversing entry (same lines, debit/credit
-    // swapped) and post it via JournalController.instance.addEntry(...).
-    // Left as a follow-up since it needs its own confirmation dialog
-    // (per GDialogTheme) before firing.
   }
 }

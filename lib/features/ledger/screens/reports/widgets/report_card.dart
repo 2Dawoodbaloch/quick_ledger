@@ -25,7 +25,7 @@ class GReportCard extends StatelessWidget {
           color: Theme.of(context).cardTheme.color,
           borderRadius: BorderRadius.circular(GSizes.cardRadiusSm),
           border: Border.all(
-            color: dark ? GColors.borderDark : GColors.lightGrey,
+            color: dark ? GColors.borderDark : GColors.white,
             width: 0.5,
           ),
         ),
@@ -64,7 +64,7 @@ class GReportCard extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     report.subtitle,
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
               ),

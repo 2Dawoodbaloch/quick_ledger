@@ -42,8 +42,8 @@ class UserModel {
       "name": name,
       "email": email,
       "phone": phone,
-      "business_name": businessName,
-      "business_type": businessType,
+      "businessName": businessName,
+      "businessType": businessType,
     };
   }
 
@@ -63,8 +63,8 @@ class UserModel {
     name: json['name'] ?? '',
     email: json['email'] ?? '',
     phone: json['phone'] ?? '',
-    businessName: json['business_name'] ?? json['businessName'] ?? '',
-    businessType: json['business_type'] ?? json['businessType'] ?? '',
+    businessName: json['businessName'] ?? json['businessName'] ?? '',
+    businessType: json['businessType'] ?? json['businessType'] ?? '',
   );
 }
 }

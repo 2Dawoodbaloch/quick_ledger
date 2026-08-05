@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quick_ledger/common/widgets/screens/empty_state.dart';
-import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/accounts/account_controller.dart';
 import 'package:quick_ledger/features/ledger/controllers/reports/reports_controller.dart';
 import 'package:quick_ledger/features/ledger/screens/accounts/new_accounts/new_accounts.dart';
 import 'package:quick_ledger/features/ledger/screens/reports/widgets/report_card.dart';

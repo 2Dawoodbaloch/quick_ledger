@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
-import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/accounts/account_controller.dart';
 import 'package:quick_ledger/features/ledger/model/reports/trial_balance/trial_balance_item_model.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
 

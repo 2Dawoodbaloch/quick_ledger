@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/accounts/account_controller.dart';
 import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
 import 'package:quick_ledger/features/ledger/model/accounts/account_model.dart';
 import 'package:quick_ledger/features/ledger/model/journal/journal_entries_model.dart';

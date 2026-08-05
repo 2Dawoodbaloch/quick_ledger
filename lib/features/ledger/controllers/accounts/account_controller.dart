@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:quick_ledger/data/repositories/accounts/account_repository.dart';
 import 'package:quick_ledger/features/ledger/model/accounts/account_model.dart';
 import 'package:quick_ledger/features/ledger/model/journal/journal_entries_model.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
@@ -8,15 +9,19 @@ import 'package:quick_ledger/utils/constants/enum.dart';
 class AccountController extends GetxController {
   static AccountController get instance => Get.find();
 
-  /// Starts empty on purpose — same reasoning as JournalController.
-  /// This is what makes AccountsScreen show its empty state by
-  /// default for a new user.
+
+  final _repository = AccountRepository.instance;
+
+
+  Future<void> fetchAccounts() async {
+    final accounts = await _repository.fetchAccounts();
+    allAccounts.assignAll(accounts);
+  }
+
+
+
   final RxList<AccountModel> allAccounts = <AccountModel>[].obs;
 
-  /// Grouped in standard accounting order: Assets, Liabilities,
-  /// Equity, Income, Expenses. Only non-empty groups are included, so
-  /// the screen doesn't render an empty "Equity" header with nothing
-  /// under it just because no equity account has been added yet.
   Map<AccountType, List<AccountModel>> get groupedAccounts {
     final Map<AccountType, List<AccountModel>> groups = {};
     for (final type in AccountType.values) {
@@ -28,22 +33,7 @@ class AccountController extends GetxController {
     return groups;
   }
 
-  void addAccount(AccountModel account) {
-    allAccounts.add(account);
-    log("========== ALL ACCOUNTS ==========");
 
-    for (final a in allAccounts) {
-      log(
-        "Code : ${a.code}"
-        "Name: ${a.name} | "
-        "Type: ${a.type} | "
-        "Category: ${a.category} | "
-        "Balance: ${a.currentBalance}",
-      );
-    }
-
-    log("==================================");
-  }
 
   // ============================================================
   // CATEGORY TOTALS — what Home's balance breakdown actually needs

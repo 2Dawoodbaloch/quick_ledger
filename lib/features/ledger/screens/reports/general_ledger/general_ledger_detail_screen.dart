@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/accounts/account_controller.dart';
 import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
 
 class GeneralLedgerDetailScreen extends StatelessWidget {

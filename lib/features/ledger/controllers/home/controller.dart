@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/accounts/account_controller.dart';
 import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
 import 'package:quick_ledger/features/ledger/model/home/transactions_model.dart';
 import 'package:quick_ledger/features/ledger/model/journal/journal_entries_model.dart';

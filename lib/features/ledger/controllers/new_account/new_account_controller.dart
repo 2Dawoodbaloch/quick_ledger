@@ -1,19 +1,20 @@
 import 'dart:developer';
 import 'dart:math' hide log;
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
+import 'package:quick_ledger/data/repositories/accounts/account_repository.dart';
 import 'package:quick_ledger/features/ledger/model/accounts/account_model.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
 
 class NewAccountController extends GetxController {
+  static NewAccountController get instance => Get.find();
   final accountNameController = TextEditingController();
   final accountCodeController = TextEditingController();
   final openingBalanceController = TextEditingController();
   final descriptionController = TextEditingController();
 
   final selectedType = AccountType.expense.obs;
+  final accountRepository = AccountRepository.instance;
 
   // category
   late final Rx<AccountCategory> selectedCategory = categoriesForType(
@@ -54,7 +55,7 @@ class NewAccountController extends GetxController {
   bool get canCreate =>
       accountNameController.text.trim().isNotEmpty &&
       accountCodeController.text.trim().isNotEmpty;
-  void createAccount() {
+  Future<void> createAccount() async {
     // if (!canCreate) return;
 
     final account = AccountModel(
@@ -65,22 +66,26 @@ class NewAccountController extends GetxController {
       type: selectedType.value,
       // Empty opening balance defaults to 0 rather than crashing on
       // double.parse — a brand-new account commonly starts at zero.
-      openingBalance: double.tryParse(openingBalanceController.text.trim()) ?? 0,
+      openingBalance:
+          double.tryParse(openingBalanceController.text.trim()) ?? 0,
+      currentBalance:
+          double.tryParse(openingBalanceController.text.trim()) ?? 0,
       description: descriptionController.text.trim().isEmpty
           ? null
           : descriptionController.text.trim(),
     );
-   
+
     log(
       "account id : ${account.id}"
       "Code : ${account.code}"
       "Name: ${account.name}, "
       "Type: ${account.type}, "
       "Category: ${account.category}"
-      "opening balance : ${account.openingBalance}"
+      "opening balance : ${account.openingBalance}",
     );
-    AccountController.instance.addAccount(account);
-    Get.back();
+    await accountRepository.addAccount(account);
+    // Get.back();
+    Get.back(result: true);
   }
 
   @override

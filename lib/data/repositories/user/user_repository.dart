@@ -14,6 +14,8 @@ import 'package:quick_ledger/utils/exceptions/platform_exceptions.dart';
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
 
+  
+
   // varibales
   final _db = FirebaseFirestore.instance;
 

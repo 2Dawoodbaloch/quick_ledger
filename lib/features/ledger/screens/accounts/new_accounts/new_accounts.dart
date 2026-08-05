@@ -4,7 +4,7 @@ import 'package:quick_ledger/common/style/padding.dart';
 import 'package:quick_ledger/common/widgets/buttons/elevated_button.dart';
 import 'package:quick_ledger/common/widgets/text_field.dart/drop_down_field.dart';
 import 'package:quick_ledger/common/widgets/text_field.dart/form_field.dart';
-import 'package:quick_ledger/features/ledger/controllers/new_account/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/new_account/new_account_controller.dart';
 import 'package:quick_ledger/features/ledger/screens/accounts/new_accounts/widgets/account_type_card.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
@@ -19,7 +19,7 @@ class NewAccountScreen extends StatelessWidget {
   /// that happened when different buttons used different Get.to()
   /// calls and only some of them carried the binding.
 
-  final controller = Get.find<NewAccountController>();
+  final controller = NewAccountController.instance;
   // final controller = Get.put(NewAccountController());
 
   @override

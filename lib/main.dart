@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:quick_ledger/bindings/network_binding.dart';
+import 'package:quick_ledger/data/repositories/accounts/account_repository.dart';
 import 'package:quick_ledger/data/repositories/authentication_repository.dart';
 import 'package:quick_ledger/firebase_options.dart';
 import 'package:quick_ledger/routes/app_routes.dart';
@@ -16,7 +17,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((value) {
-    Get.put(AuthenticationRepository);
+    Get.put(AuthenticationRepository(), permanent: true);
+    Get.put(AccountRepository(), permanent: true);
   });
 
   runApp(const MyApp());

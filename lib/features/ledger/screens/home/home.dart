@@ -7,7 +7,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/route_manager.dart';
 import 'package:intl/intl.dart';
 import 'package:quick_ledger/common/widgets/screens/empty_state.dart';
-import 'package:quick_ledger/features/ledger/controllers/accounts/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/accounts/account_controller.dart';
 import 'package:quick_ledger/features/ledger/controllers/home/controller.dart';
 import 'package:quick_ledger/features/ledger/controllers/reports/profit_loss/profit_loss_controller.dart';
 import 'package:quick_ledger/features/ledger/screens/home/widget/account_balance_title.dart';

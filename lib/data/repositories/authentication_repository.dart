@@ -5,6 +5,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:quick_ledger/data/repositories/accounts/account_repository.dart';
 import 'package:quick_ledger/features/authentication/screens/login/login.dart';
 import 'package:quick_ledger/routes/routes_name.dart';
 import 'package:quick_ledger/utils/exceptions/firebase_auth_exceptions.dart';
@@ -51,7 +52,10 @@ class AuthenticationRepository extends GetxController {
     final user = _auth.currentUser;
 
     if (user != null) {
+           // NOW we know for certain a user exists — safe to fetch
+     
       Get.offAllNamed(RoutesName.navigationMenu);
+       await AccountRepository.instance.fetchAccounts();
     } else {
       Get.offAllNamed(RoutesName.login);
     }

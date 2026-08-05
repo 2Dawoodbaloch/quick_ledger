@@ -7,6 +7,7 @@ import 'package:quick_ledger/utils/constants/enum.dart';
 
 class ProfitLossController extends GetxController {
   static ProfitLossController get instance => Get.find();
+  
 
   /// ---------------------------------------------------------
   /// INCOME ACCOUNTS

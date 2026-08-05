@@ -22,7 +22,7 @@ class NavigationMenu extends StatefulWidget {
 }
 
 class _NavigationMenuState extends State<NavigationMenu> {
-  final controller = Get.put(NavigationController());
+  final controller = Get.find<NavigationController>();
 
   @override
   Widget build(BuildContext context) {

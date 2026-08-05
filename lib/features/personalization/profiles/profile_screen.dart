@@ -12,17 +12,12 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
- final controller = UserController.instance;
+    final controller = UserController.instance;
 
     return Scaffold(
-
-      appBar: AppBar(
-        title: const Text("Profile"),
-      ),
+      appBar: AppBar(title: const Text("Profile")),
 
       body: Obx(() {
-
         final user = controller.user.value;
         // if(user == null){
         //   return const Center(
@@ -34,25 +29,15 @@ class ProfileScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20),
 
           children: [
-
             const GProfileHeader(),
 
             const SizedBox(height: 30),
 
-            GProfileInfoTile(
-              title: "Business Name",
-              value: user.businessName,
-            ),
-SizedBox(height: GSizes.spaceBtwItems,),
-            GProfileInfoTile(
-              title: "Business Type",
-              value: user.businessType,
-            ),
-SizedBox(height: GSizes.spaceBtwItems,),
-            GProfileInfoTile(
-              title: "Phone",
-              value: user.phone,
-            ),
+            GProfileInfoTile(title: "Business Name", value: user.businessName),
+            SizedBox(height: GSizes.spaceBtwItems),
+            GProfileInfoTile(title: "Business Type", value: user.businessType),
+            SizedBox(height: GSizes.spaceBtwItems),
+            GProfileInfoTile(title: "Phone", value: user.phone),
 
             const SizedBox(height: 25),
 

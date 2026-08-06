@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:quick_ledger/features/ledger/model/journal/journal_entries_model.dart';
+import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_entries_model.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/widgets/status_pill.dart';
 import 'package:quick_ledger/utils/constants/colors.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';

@@ -6,10 +6,11 @@ import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/helpers/helper_functions.dart';
 
 class GAccountTile extends StatelessWidget {
-  const GAccountTile({super.key, required this.account, this.onTap});
+  const GAccountTile({super.key, required this.account, this.onTap,this.onLongPress});
 
   final AccountModel account;
   final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
 
   ({IconData icon, Color color, Color bg}) _styleFor(
     AccountType type,
@@ -18,6 +19,7 @@ class GAccountTile extends StatelessWidget {
     switch (type) {
       case AccountType.asset:
         return (
+      
           icon: Icons.account_balance_wallet_outlined,
           color: GColors.assetColor,
           bg: dark
@@ -42,6 +44,7 @@ class GAccountTile extends StatelessWidget {
         );
       case AccountType.income:
         return (
+          
           icon: Icons.trending_up,
           color: GColors.incomeAccountColor,
           bg: dark ? GColors.incomeBgDark : GColors.incomeAccountBg,
@@ -63,6 +66,7 @@ class GAccountTile extends StatelessWidget {
     return Card(
       child: InkWell(
         onTap: onTap,
+        onLongPressUp: onLongPress,
         borderRadius: BorderRadius.circular(GSizes.cardRadiusSm),
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -99,17 +103,17 @@ class GAccountTile extends StatelessWidget {
                       account.code,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                    Text(
-                      account.category.label,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
+                    // Text(
+                    //   account.category.label,
+                    //   style: Theme.of(context).textTheme.bodyMedium,
+                    // ),
                     
                   ],
                 ),
               ),
 
               Text(
-                '\$${account.currentBalance.toStringAsFixed(0)}',
+                '${account.currentBalance.toStringAsFixed(0)}RS',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ],

@@ -51,7 +51,7 @@ class GTrialBalanceCard extends StatelessWidget {
           Text(
             item.accountCode,
             style:
-                Theme.of(context).textTheme.bodySmall,
+                Theme.of(context).textTheme.bodyMedium,
           ),
 
           const SizedBox(height: GSizes.md),

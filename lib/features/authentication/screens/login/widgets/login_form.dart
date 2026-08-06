@@ -56,7 +56,9 @@ class GLoginForm extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Obx(
+           Row(
+            children: [
+                 Obx(
                 () => Checkbox(
                   value: controller.rememberMe.value,
                   onChanged: (value) {
@@ -65,6 +67,8 @@ class GLoginForm extends StatelessWidget {
                 ),
               ),
               Text(GTexts.rememberMe),
+            ],
+           ),
 
               /// forgotten password
               TextButton(

@@ -10,7 +10,7 @@ import 'package:quick_ledger/utils/constants/text_strings.dart';
 import 'package:quick_ledger/utils/validators/validation.dart';
 
 class GSignupForm extends StatelessWidget {
-   GSignupForm({super.key});
+  GSignupForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,7 @@ class GSignupForm extends StatelessWidget {
         children: [
           TextFormField(
             controller: controller.name,
-            validator: (value) =>
-                GValidator.validateEmptyText('Name', value),
+            validator: (value) => GValidator.validateEmptyText('Name', value),
             decoration: InputDecoration(
               labelText: GTexts.fullName,
               prefixIcon: Icon(Iconsax.user),
@@ -50,13 +49,13 @@ class GSignupForm extends StatelessWidget {
             ),
           ),
           SizedBox(height: GSizes.spaceBtwInputFields),
-          Divider(color: GColors.dark,),
+          Divider(color: GColors.dark),
           SizedBox(height: GSizes.spaceBtwInputFields),
           Text(
             "Business Details",
             style: Theme.of(context).textTheme.bodyMedium,
           ),
-          SizedBox(height: GSizes.sm,),
+          SizedBox(height: GSizes.sm),
           // business details
           TextFormField(
             controller: controller.businessName,
@@ -75,27 +74,28 @@ class GSignupForm extends StatelessWidget {
           ),
 
           SizedBox(height: GSizes.spaceBtwInputFields),
+
           //password
-
-          TextFormField(
-            obscureText: controller.isPasswordVisible.value,
-            controller: controller.password,
-            validator: (value) => GValidator.validatePassword(value),
-            decoration: InputDecoration(
-              labelText: GTexts.password,
-              prefixIcon: Icon(Iconsax.password_check),
-              suffixIcon: IconButton(
-               onPressed: () => controller.isPasswordVisible.value =
-                  !controller.isPasswordVisible.value,
-              icon:Obx(() =>  Icon(
-                controller.isPasswordVisible.value
-                    ? Iconsax.eye
-                    : Iconsax.eye_slash,
-              ),)
-           
+          Obx(
+            () => TextFormField(
+              obscureText: controller.isPasswordVisible.value,
+              controller: controller.password,
+              validator: (value) => GValidator.validatePassword(value),
+              decoration: InputDecoration(
+                labelText: GTexts.password,
+                prefixIcon: Icon(Iconsax.password_check),
+                suffixIcon: IconButton(
+                  onPressed: () => controller.isPasswordVisible.value =
+                      !controller.isPasswordVisible.value,
+                  icon: Icon(
+                    controller.isPasswordVisible.value
+                        ? Iconsax.eye_slash
+                        : Iconsax.eye,
+                  ),
+                ),
+              ),
             ),
-          ),),
-
+          ),
           SizedBox(height: GSizes.spaceBtwInputFields / 2),
           // privacy policy checkbox
           GPrivacyPolicyCheckBox(),
@@ -109,10 +109,13 @@ class GSignupForm extends StatelessWidget {
           //   },
           //   child: Text(GTexts.createAccount),
           // ),
-
-          ElevatedButton(onPressed: (){
-             controller.registerUser();
-          }, child: Text("Create Account"))
+          ElevatedButton(
+            onPressed: () {
+              
+              controller.registerUser();
+            },
+            child: Text("Create Account"),
+          ),
         ],
       ),
     );

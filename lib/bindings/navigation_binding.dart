@@ -4,7 +4,7 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:quick_ledger/bottom_navigation.dart';
 import 'package:quick_ledger/features/ledger/controllers/accounts/account_controller.dart';
 import 'package:quick_ledger/features/ledger/controllers/home/controller.dart';
-import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/journal/journal_controller.dart';
 import 'package:quick_ledger/features/ledger/controllers/reports/profit_loss/profit_loss_controller.dart';
 import 'package:quick_ledger/features/ledger/controllers/reports/reports_controller.dart';
 

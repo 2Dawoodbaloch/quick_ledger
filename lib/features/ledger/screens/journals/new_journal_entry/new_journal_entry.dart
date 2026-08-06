@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:quick_ledger/common/widgets/text_field.dart/date_field.dart';
 import 'package:quick_ledger/common/widgets/text_field.dart/form_field.dart';
-import 'package:quick_ledger/features/ledger/controllers/new_journal_entry/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/new_journal_entry/new_journal_entry_controller.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/widgets/balance_banner.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/widgets/journal_line_card.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
@@ -13,7 +13,7 @@ class NewJournalEntryScreen extends StatelessWidget {
   NewJournalEntryScreen({super.key});
 
   final controller = Get.find<NewJournalEntryController>();
-  final currencyFormat = NumberFormat.currency(symbol: '\$', decimalDigits: 0);
+  final currencyFormat = NumberFormat.currency(symbol: 'RS', decimalDigits: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +125,7 @@ class NewJournalEntryScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: OutlinedButton(
-                      onPressed: controller.saveAsDraft,
+                      onPressed: (){},
                       child: const Text(GTexts.saveAsDraft),
                     ),
                   ),

@@ -1,27 +1,33 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:quick_ledger/data/repositories/accounts/account_repository.dart';
 import 'package:quick_ledger/features/ledger/model/accounts/account_model.dart';
-import 'package:quick_ledger/features/ledger/model/journal/journal_entries_model.dart';
+import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_entries_model.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
 
 class AccountController extends GetxController {
   static AccountController get instance => Get.find();
+  late StreamSubscription _accountSubscription;
 
+  @override
+  void onInit() {
+    super.onInit();
 
-  final _repository = AccountRepository.instance;
+    _accountSubscription = AccountRepository.instance.streamAccounts().listen((
+      accounts,
+    ) {
+      allAccounts.assignAll(accounts);
 
-
-  Future<void> fetchAccounts() async {
-    final accounts = await _repository.fetchAccounts();
-    allAccounts.assignAll(accounts);
+      log("Accounts Updated");
+      log("Count : ${accounts.length}");
+    });
   }
-
-
 
   final RxList<AccountModel> allAccounts = <AccountModel>[].obs;
 
+  // grouped accounts
   Map<AccountType, List<AccountModel>> get groupedAccounts {
     final Map<AccountType, List<AccountModel>> groups = {};
     for (final type in AccountType.values) {
@@ -33,11 +39,17 @@ class AccountController extends GetxController {
     return groups;
   }
 
+  Future<void> deleteAccount(String accountId) async {
+    try {
+      await AccountRepository.instance.deleteAccount(accountId);
 
+      Get.snackbar("Success", "Account deleted successfully");
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+  }
 
-  // ============================================================
-  // CATEGORY TOTALS — what Home's balance breakdown actually needs
-  // ============================================================
+  // category => what home balance need category
 
   double _totalForCategory(AccountCategory category) {
     return allAccounts
@@ -76,65 +88,73 @@ class AccountController extends GetxController {
     return totalAssets - totalLiabilities;
   }
 
-  void postJournal(JournalEntryModel journal) {
-  log("========== POST JOURNAL ==========");
+  Future<void> postJournal(JournalEntryModel journal) async {
+    log("========== POST JOURNAL ==========");
 
-  for (final line in journal.lines) {
-    // Find the account using its unique code
-    final account = allAccounts.firstWhereOrNull(
-      (a) => a.code == line.accountCode,
-    );
+    for (final line in journal.lines) {
+      // Find the account using its unique code
+      final account = allAccounts.firstWhereOrNull(
+        (a) => a.code == line.accountCode,
+      );
 
-    if (account == null) {
-      log("❌ Account not found: ${line.accountCode}");
-      continue;
+      if (account == null) {
+        log("❌ Account not found: ${line.accountCode}");
+        continue;
+      }
+
+      log("--------------------------------");
+      log("Posting Account : ${account.name}");
+      log("Code            : ${account.code}");
+      log("Type            : ${account.type}");
+      log("Old Balance     : ${account.currentBalance}");
+      log("Debit           : ${line.debit}");
+      log("Credit          : ${line.credit}");
+
+      switch (account.type) {
+        // Assets: Debit ↑ Credit ↓
+        case AccountType.asset:
+          account.currentBalance += line.debit;
+          account.currentBalance -= line.credit;
+          break;
+
+        // Liabilities: Credit ↑ Debit ↓
+        case AccountType.liability:
+          account.currentBalance += line.credit;
+          account.currentBalance -= line.debit;
+          break;
+
+        // Equity: Credit ↑ Debit ↓
+        case AccountType.equity:
+          account.currentBalance += line.credit;
+          account.currentBalance -= line.debit;
+          break;
+
+        // Income: Credit ↑ Debit ↓
+        case AccountType.income:
+          account.currentBalance += line.credit;
+          account.currentBalance -= line.debit;
+          break;
+
+        // Expenses: Debit ↑ Credit ↓
+        case AccountType.expense:
+          account.currentBalance += line.debit;
+          account.currentBalance -= line.credit;
+          break;
+      }
+
+      log("New Balance : ${account.currentBalance}");
+
+      await AccountRepository.instance.updateAccount(account);
     }
 
-    log("--------------------------------");
-    log("Posting Account : ${account.name}");
-    log("Code            : ${account.code}");
-    log("Type            : ${account.type}");
-    log("Old Balance     : ${account.currentBalance}");
-    log("Debit           : ${line.debit}");
-    log("Credit          : ${line.credit}");
+    allAccounts.refresh();
 
-    switch (account.type) {
-      // Assets: Debit ↑ Credit ↓
-      case AccountType.asset:
-        account.currentBalance += line.debit;
-        account.currentBalance -= line.credit;
-        break;
-
-      // Liabilities: Credit ↑ Debit ↓
-      case AccountType.liability:
-        account.currentBalance += line.credit;
-        account.currentBalance -= line.debit;
-        break;
-
-      // Equity: Credit ↑ Debit ↓
-      case AccountType.equity:
-        account.currentBalance += line.credit;
-        account.currentBalance -= line.debit;
-        break;
-
-      // Income: Credit ↑ Debit ↓
-      case AccountType.income:
-        account.currentBalance += line.credit;
-        account.currentBalance -= line.debit;
-        break;
-
-      // Expenses: Debit ↑ Credit ↓
-      case AccountType.expense:
-        account.currentBalance += line.debit;
-        account.currentBalance -= line.credit;
-        break;
-    }
-
-    log("New Balance     : ${account.currentBalance}");
+    log("========== POSTING COMPLETE ==========");
   }
 
-  allAccounts.refresh();
-
-  log("========== POSTING COMPLETE ==========");
-}
+  @override
+  void onClose() {
+    _accountSubscription.cancel();
+    super.onClose();
+  }
 }

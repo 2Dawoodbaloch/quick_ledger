@@ -3,33 +3,28 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:quick_ledger/data/repositories/journal/journal_repository.dart';
 import 'package:quick_ledger/features/ledger/controllers/accounts/account_controller.dart';
-import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/journal/journal_controller.dart';
 import 'package:quick_ledger/features/ledger/model/accounts/account_model.dart';
-import 'package:quick_ledger/features/ledger/model/journal/journal_entries_model.dart';
+import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_entries_model.dart';
 import 'package:quick_ledger/features/ledger/model/journal/journal_line_snapshot.dart';
 import 'package:quick_ledger/features/ledger/model/new_journal_entry/journal_line_model.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
 
 class NewJournalEntryController extends GetxController {
   static NewJournalEntryController get instance => Get.find();
-
-  // ============================================================
-  // HEADER FIELDS — Journal type, Reference, Date, Narration
-  // ============================================================
+  final controller = JournalRepository.instance;
 
   final Rx<JournalType> selectedJournalType = JournalType.sales.obs;
   final Rx<DateTime> selectedDate = DateTime.now().obs;
   final narrationController = TextEditingController();
   final dateFormat = DateFormat('MMM d, yyyy');
+  final id = DateTime.now().millisecondsSinceEpoch.toString();
 
-  /// Auto-generates the next reference number based on how many
-  /// entries already exist, e.g. JE-1043. Recalculated each time the
-  /// form opens fresh, since JournalController is the source of truth
-  /// for how many entries exist.
   String get reference {
-    final nextNumber = 1040 + JournalController.instance.allEntries.length;
-    return 'JE-$nextNumber';
+    final reference = "JE-${id.substring(id.length - 6)}";
+    return reference;
   }
 
   String get formattedDate => dateFormat.format(selectedDate.value);
@@ -48,16 +43,14 @@ class NewJournalEntryController extends GetxController {
     if (picked != null) selectedDate.value = picked;
   }
 
-  // ============================================================
+
   // ACCOUNT OPTIONS — real accounts, read live from AccountController
-  // ============================================================
 
   List<AccountModel> get accountOptions =>
       AccountController.instance.allAccounts;
 
-  // ============================================================
   // LINES — add/remove, one-field-active rule, live totals
-  // ============================================================
+
 
   /// Starts with two blank lines — a journal entry always needs at
   /// least two, since every debit needs an offsetting credit.
@@ -78,9 +71,6 @@ class NewJournalEntryController extends GetxController {
   void addLine() {
     final line = JournalLineModel();
 
-    // Listeners recalculate totals live as the user types, and
-    // enforce "a line is either debit OR credit, never both" by
-    // clearing the opposite field the moment one gets a value.
     line.debitController.addListener(
       () => _onFieldChanged(line, isDebit: true),
     );
@@ -126,10 +116,6 @@ class NewJournalEntryController extends GetxController {
     totalCredit.value = creditSum;
   }
 
-  // ============================================================
-  // BALANCE CHECK
-  // ============================================================
-
   bool get isBalanced =>
       totalDebit.value == totalCredit.value && totalDebit.value > 0;
 
@@ -165,7 +151,9 @@ Credit       : ${line.creditController.text}
   }
 
   JournalEntryModel _buildEntry(JournalStatus status) {
+    final ids = DateTime.now().millisecondsSinceEpoch.toString();
     return JournalEntryModel(
+      id: ids,
       reference: reference,
       narration: narrationController.text,
       date: selectedDate.value,
@@ -176,34 +164,23 @@ Credit       : ${line.creditController.text}
     );
   }
 
-  void saveAsDraft() {
-    JournalController.instance.addEntry(_buildEntry(JournalStatus.draft));
-    Get.back();
-  }
+  // void saveAsDraft() {
+  //   JournalController.instance.addEntry(_buildEntry(JournalStatus.draft));
+  //   Get.back();
+  // }
 
-  void postEntry() {
+  Future<void> postEntry() async {
     if (!canPost) return;
 
     final entry = _buildEntry(JournalStatus.posted);
 
     // Update account balances
-    AccountController.instance.postJournal(entry);
+   await  AccountController.instance.postJournal(entry);
 
     // Save journal
-    JournalController.instance.addEntry(entry);
-
+    await controller.addJournal(entry);
     Get.back();
   }
-
-  // void postEntry() {
-  //   if (!canPost) return;
-  //   JournalController.instance.addEntry(_buildEntry(JournalStatus.posted));
-  //   Get.back();
-  // }
-
-  // ============================================================
-  // CLEANUP
-  // ============================================================
 
   @override
   void onClose() {

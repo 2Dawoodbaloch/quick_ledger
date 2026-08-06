@@ -24,7 +24,6 @@ class GeneralLedgerScreen extends StatelessWidget {
           itemCount: controller.ledgerAccounts.length,
           itemBuilder: (_, index) {
             final item = controller.ledgerAccounts[index];
-
             return GGeneralLedgerCard(
               item: item,
               onTap: () {

@@ -33,8 +33,7 @@ class HomeScreen extends StatelessWidget {
     final userController = Get.put(
       UserController(),
     ); // use Get.put becasue we use this first time
-    // now if in profile user controller needed use final controller = UserController.instance;
-    // becuuse we already in home intilized it .
+
     log("------ DASHBOARD ------");
 
     for (final account in accountController.allAccounts) {

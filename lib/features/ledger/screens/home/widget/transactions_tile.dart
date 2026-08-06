@@ -45,10 +45,10 @@ class GTransactionTile extends StatelessWidget {
         ),
         subtitle: Text(
           transaction.date,
-          style: Theme.of(context).textTheme.bodySmall,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         trailing: Text(
-          '${isIncome ? '+' : '-'}\$${transaction.amount.toStringAsFixed(0)}',
+          '${isIncome ? '+' : '-'}RS${transaction.amount.toStringAsFixed(0)}',
           style: Theme.of(context).textTheme.titleSmall?.copyWith(
                 color: color,
                 fontWeight: FontWeight.w600,

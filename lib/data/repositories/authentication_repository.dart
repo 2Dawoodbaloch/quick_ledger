@@ -55,7 +55,6 @@ class AuthenticationRepository extends GetxController {
            // NOW we know for certain a user exists — safe to fetch
      
       Get.offAllNamed(RoutesName.navigationMenu);
-       await AccountRepository.instance.fetchAccounts();
     } else {
       Get.offAllNamed(RoutesName.login);
     }
@@ -129,7 +128,7 @@ class AuthenticationRepository extends GetxController {
     try {
       await FirebaseAuth.instance.signOut();
       await GoogleSignIn.instance.signOut();
-      Get.offAll(() => LoginScreen());
+      Get.offAllNamed(RoutesName.login);
     } on FirebaseAuthException catch (e) {
       throw GFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {

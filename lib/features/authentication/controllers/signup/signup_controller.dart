@@ -28,6 +28,11 @@ class SignupController extends GetxController {
 
   Future<void> registerUser() async {
     try {
+        //     // start loading
+      GFullScreenLoader.openLoadingDialog(
+        'We are Processing your information...',
+      );
+
       log("========================================", name: "SIGNUP");
       log("REGISTER USER FLOW START", name: "SIGNUP");
 

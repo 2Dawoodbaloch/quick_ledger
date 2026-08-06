@@ -3,7 +3,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/journal/journal_controller.dart';
 import 'package:quick_ledger/features/ledger/model/reports/report_item_model.dart';
 import 'package:quick_ledger/routes/routes_name.dart';
 

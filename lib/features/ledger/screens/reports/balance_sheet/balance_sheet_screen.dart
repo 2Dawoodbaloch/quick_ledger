@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quick_ledger/features/ledger/controllers/reports/balance_sheet/balance_sheet_controller.dart';
+import 'package:quick_ledger/utils/constants/colors.dart';
 
 class BalanceSheetScreen extends StatelessWidget {
   BalanceSheetScreen({super.key});
@@ -24,9 +25,7 @@ class BalanceSheetScreen extends StatelessWidget {
 
           children: [
 
-            ///===========================
             /// Assets
-            ///===========================
 
             Text(
               "Assets",
@@ -46,21 +45,22 @@ class BalanceSheetScreen extends StatelessWidget {
 
             const Divider(),
 
-            ListTile(
-              title: const Text(
-                "Total Assets",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              trailing: Text(
-                controller.totalAssets.toStringAsFixed(2),
+            Card(
+              color: GColors.white,
+              child: ListTile(
+                title: const Text(
+                  "Total Assets",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                trailing: Text(
+                  controller.totalAssets.toStringAsFixed(2),
+                ),
               ),
             ),
 
             const SizedBox(height: 20),
 
-            ///===========================
             /// Liabilities
-            ///===========================
 
             Text(
               "Liabilities",
@@ -80,21 +80,23 @@ class BalanceSheetScreen extends StatelessWidget {
 
             const Divider(),
 
-            ListTile(
-              title: const Text(
-                "Total Liabilities",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              trailing: Text(
-                controller.totalLiabilities.toStringAsFixed(2),
+            Card(
+              color: GColors.white,
+              child: ListTile(
+                title: const Text(
+                  "Total Liabilities",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                trailing: Text(
+                  controller.totalLiabilities.toStringAsFixed(2),
+                ),
               ),
             ),
 
             const SizedBox(height: 20),
 
-            ///===========================
+  
             /// Equity
-            ///===========================
 
             Text(
               "Equity",
@@ -121,13 +123,16 @@ class BalanceSheetScreen extends StatelessWidget {
 
             const Divider(),
 
-            ListTile(
-              title: const Text(
-                "Total Equity",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              trailing: Text(
-                controller.totalEquity.toStringAsFixed(2),
+            Card(
+              color: GColors.white,
+              child: ListTile(
+                title: const Text(
+                  "Total Equity",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                trailing: Text(
+                  controller.totalEquity.toStringAsFixed(2),
+                ),
               ),
             ),
 

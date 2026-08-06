@@ -4,4 +4,5 @@ class GKeys {
   static const String rememberMePassword = 'rememberPassword';
    static const String userCollection = 'Users';
    static const String accountCollection = "accounts";
+   static const String journalCollection = "journals";
 }

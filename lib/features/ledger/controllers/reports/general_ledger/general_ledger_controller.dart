@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:quick_ledger/features/ledger/controllers/accounts/account_controller.dart';
-import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/journal/journal_controller.dart';
 import 'package:quick_ledger/features/ledger/model/reports/general_ledger/general_ledger_item_model.dart';
 
 class GeneralLedgerController extends GetxController {

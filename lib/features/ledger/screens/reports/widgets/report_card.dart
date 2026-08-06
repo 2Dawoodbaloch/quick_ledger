@@ -31,9 +31,8 @@ class GReportCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // -------------------------------------------------------
+
             // Report Icon
-            // -------------------------------------------------------
             Container(
               width: 42,
               height: 42,
@@ -50,9 +49,8 @@ class GReportCard extends StatelessWidget {
 
             const SizedBox(width: GSizes.md),
 
-            // -------------------------------------------------------
+
             // Title + Subtitle
-            // -------------------------------------------------------
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

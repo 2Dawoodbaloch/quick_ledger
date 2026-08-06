@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quick_ledger/common/widgets/screens/empty_state.dart';
 import 'package:quick_ledger/features/ledger/controllers/accounts/account_controller.dart';
+import 'package:quick_ledger/features/ledger/model/accounts/account_model.dart';
 import 'package:quick_ledger/features/ledger/screens/accounts/widgets/account_title.dart';
 import 'package:quick_ledger/routes/routes_name.dart';
+import 'package:quick_ledger/utils/constants/colors.dart';
 import 'package:quick_ledger/utils/constants/enum.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/constants/text_strings.dart';
 
-/// No Scaffold here — same reasoning as JournalsScreen. NavigationMenu
-/// owns the single Scaffold/bottomNavigationBar/FAB for the whole
-/// tab shell; this is just the body content for the Accounts tab.
+
 class AccountsScreen extends StatelessWidget {
   AccountsScreen({super.key});
 
-  final controller = Get.find<AccountController>();
-
+  final controller = AccountController.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -52,13 +51,12 @@ class AccountsScreen extends StatelessWidget {
                         buttonLabel: '+ ${GTexts.newAccount}',
                         secondaryLabel: GTexts.useStarterTemplate,
                         onSecondaryTap: () {
-                              // Get.to(() => NewAccountScreen());
-                         
-                              //     Get.toNamed(RoutesName.newAccounts);
+                          // Get.to(() => NewAccountScreen());
+
+                          //     Get.toNamed(RoutesName.newAccounts);
                         },
                         onButtonTap: () {
                           Get.toNamed(RoutesName.newAccounts);
-          
                         },
                       ),
                     ),
@@ -85,7 +83,13 @@ class AccountsScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(
                             bottom: GSizes.spaceBtwItems,
                           ),
-                          child: GAccountTile(account: account, onTap: () {}),
+                          child: GAccountTile(
+                            account: account,
+                            onTap: () {},
+                            onLongPress: () {
+                              _showAccountOptions(context, account);
+                            },
+                          ),
                         ),
                       ),
                       const SizedBox(height: GSizes.xs),
@@ -114,4 +118,56 @@ class AccountsScreen extends StatelessWidget {
         return 'Expenses';
     }
   }
+}
+
+void _showAccountOptions(BuildContext context, AccountModel account) {
+  showModalBottomSheet(
+    context: context,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (_) {
+      return SafeArea(
+        child: Wrap(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.edit_outlined),
+              title: const Text("Edit Account"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(Icons.delete_outline, color: Colors.red),
+              title: const Text(
+                "Delete Account",
+                style: TextStyle(color: Colors.red),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                _showDeleteDialog(context, account);
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+void _showDeleteDialog(BuildContext context, AccountModel account) {
+  Get.defaultDialog(
+    backgroundColor: GColors.white,
+    title: "Delete Account",middleTextStyle: TextStyle(color: GColors.expense),
+    middleText: "Are you sure you want to delete '${account.name}'?",titleStyle: Theme.of(context).textTheme.bodyMedium,
+    textCancel: "Cancel",
+    textConfirm: "Delete",
+    confirmTextColor: Colors.white,
+    onConfirm: () async {
+      Get.back();
+
+      await AccountController.instance.deleteAccount(account.id);
+    },
+  );
 }

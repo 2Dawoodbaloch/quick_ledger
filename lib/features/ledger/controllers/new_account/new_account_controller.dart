@@ -84,8 +84,8 @@ class NewAccountController extends GetxController {
       "opening balance : ${account.openingBalance}",
     );
     await accountRepository.addAccount(account);
-    // Get.back();
-    Get.back(result: true);
+    Get.back();
+  
   }
 
   @override

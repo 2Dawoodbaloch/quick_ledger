@@ -27,7 +27,7 @@ class UserModel {
         id: document.id,
         name: data['name'] ?? '',
         email: data['email'] ?? '',
-        phone: data['phoneNumber'] ?? '',
+        phone: data['phone'] ?? '',
         businessName: data['businessName'] ?? '',
         businessType: data['businessType'] ?? '',
       );

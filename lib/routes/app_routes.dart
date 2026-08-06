@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:quick_ledger/bindings/balance_sheet_binding.dart';
 import 'package:quick_ledger/bindings/general_ledger_binding.dart';
@@ -7,7 +6,7 @@ import 'package:quick_ledger/bindings/login_binding.dart';
 import 'package:quick_ledger/bindings/navigation_binding.dart';
 import 'package:quick_ledger/bindings/new_account_screen_binding.dart';
 import 'package:quick_ledger/bindings/new_journal_entry_binding.dart';
-import 'package:quick_ledger/bindings/profile_binding.dart';
+import 'package:quick_ledger/bindings/profit_loss_binding.dart';
 import 'package:quick_ledger/bindings/signup_bindings.dart';
 import 'package:quick_ledger/bindings/trial_balance_binding.dart';
 import 'package:quick_ledger/bottom_navigation.dart';
@@ -87,5 +86,6 @@ GetPage(
     //Trial balance
     GetPage(name: RoutesName.trialBalance, page: () => TrialBalanceScreen(),binding: TrialBalanceBinding()),
      GetPage(name: RoutesName.balanceSheet, page: () => BalanceSheetScreen(),binding: BalanceSheetBinding()),
+     GetPage(name: RoutesName.profitLoss, page: () => ProfitLossScreen(),binding: ProfitLossBinding())
   ];
 }

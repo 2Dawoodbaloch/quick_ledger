@@ -1,6 +1,6 @@
 class RoutesName {
   RoutesName._(); // prevents instantiation — pure constants holder
-    static const String userProfile = "/user-profile";
+  static const String userProfile = "/user-profile";
   static const String login = "/login";
   static const String signup = "/signup";
   static const String navigationMenu = "/navigation-menu";

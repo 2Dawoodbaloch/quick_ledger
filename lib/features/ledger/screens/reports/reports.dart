@@ -5,17 +5,16 @@ import 'package:quick_ledger/features/ledger/controllers/accounts/account_contro
 import 'package:quick_ledger/features/ledger/controllers/reports/reports_controller.dart';
 import 'package:quick_ledger/features/ledger/screens/accounts/new_accounts/new_accounts.dart';
 import 'package:quick_ledger/features/ledger/screens/reports/widgets/report_card.dart';
+import 'package:quick_ledger/routes/routes_name.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/constants/text_strings.dart';
 
-/// No Scaffold here — same reasoning as JournalsScreen. NavigationMenu
-/// owns the single Scaffold/bottomNavigationBar/FAB for the whole
-/// tab shell; this is just the body content for the Accounts tab.
+
 class ReportsScreen extends StatelessWidget {
   ReportsScreen({super.key});
 
-  final controller = Get.find<AccountController>();
-  final reportController = Get.find<ReportsController>();
+  final controller = AccountController.instance;
+  final reportController = ReportsController.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +46,14 @@ class ReportsScreen extends StatelessWidget {
                       ),
                       child: GEmptyState(
                         icon: Icons.account_balance_outlined,
-                        title: GTexts.noAccountsYet,
-                        subtitle: GTexts.noAccountsSubtitle,
+                        title: GTexts.nothingToReportYet,
+                        subtitle: GTexts.nothingToReportSubtitle,
                         buttonLabel: '+ ${GTexts.newAccount}',
                         secondaryLabel: GTexts.useStarterTemplate,
                         onSecondaryTap: () {},
                         onButtonTap: () {
-                          Get.to(() => NewAccountScreen());
-                          // Get.toNamed(RoutesName.newAccounts);
+                        
+                          Get.toNamed(RoutesName.newAccounts);
                         },
                       ),
                     ),

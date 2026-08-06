@@ -66,7 +66,7 @@ class GGeneralLedgerCard extends StatelessWidget {
 
                   Text(
                     "${item.transactionCount} Entries",
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
               ),
@@ -74,7 +74,7 @@ class GGeneralLedgerCard extends StatelessWidget {
 
             /// Balance
             Text(
-              "\$${item.currentBalance.toStringAsFixed(2)}",
+              "RS${item.currentBalance.toStringAsFixed(2)}",
               style: Theme.of(context).textTheme.titleMedium,
             ),
 

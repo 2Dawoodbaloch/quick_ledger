@@ -43,12 +43,15 @@ class GJournalLineCard extends StatelessWidget {
                 child: Obx(
                   () => DropdownButtonHideUnderline(
                     child: DropdownButton<AccountModel>(
+                      dropdownColor: GColors.white,
                       isExpanded: true,
                       hint: const Text('Select account'),
-                      value: line.account.value,
+                      value: accountOptions.contains(line.account.value)
+                          ? line.account.value
+                          : null,
                       items: accountOptions.map((account) {
                         return DropdownMenuItem<AccountModel>(
-                          value:account,
+                          value: account,
                           child: Text(account.name),
                         );
                       }).toList(),

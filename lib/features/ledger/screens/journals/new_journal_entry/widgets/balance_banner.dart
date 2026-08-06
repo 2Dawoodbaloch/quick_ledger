@@ -53,7 +53,7 @@ class GBalanceBanner extends StatelessWidget {
                 ),
               ),
               Text(
-                '$totalDebit = $totalCredit',
+                'totalDebit = totalCredit',
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: color),
               ),
             ],

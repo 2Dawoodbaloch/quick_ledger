@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quick_ledger/common/widgets/text_field.dart/field_label.dart';
+import 'package:quick_ledger/utils/constants/colors.dart';
 
 class GDropdownField<T> extends StatelessWidget {
   const GDropdownField({
@@ -22,7 +23,7 @@ class GDropdownField<T> extends StatelessWidget {
       children: [
         GFieldLabel(label),
         DropdownButtonFormField<T>(
-         
+          dropdownColor: GColors.white,
           initialValue: value,
           items: items,
           onChanged: onChanged,

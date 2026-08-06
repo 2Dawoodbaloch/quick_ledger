@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quick_ledger/common/widgets/screens/empty_state.dart';
 import 'package:quick_ledger/common/widgets/text_fields/search_bar.dart';
-import 'package:quick_ledger/features/ledger/controllers/journal/controller.dart';
+import 'package:quick_ledger/features/ledger/controllers/journal/journal_controller.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/journal_detail_screen/journal_detail_screen.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/new_journal_entry/widgets/journal_filter_chips.dart';
 import 'package:quick_ledger/features/ledger/screens/journals/widget/journal_entry_list.dart';
@@ -22,7 +22,7 @@ class JournalsScreen extends StatelessWidget {
   // Controller is provided by JournalBinding when this route is
   // visited — Get.find() just retrieves the existing instance,
   // it doesn't create a new one on every rebuild like Get.put() would.
-  final controller = Get.find<JournalController>();
+  final controller = JournalController.instance;
 
   @override
   Widget build(BuildContext context) {

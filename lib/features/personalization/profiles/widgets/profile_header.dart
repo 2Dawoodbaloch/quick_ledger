@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:quick_ledger/features/personalization/controllers/user_controller.dart';
-import 'package:quick_ledger/features/personalization/profiles/controller/profile_controller.dart';
+import 'package:quick_ledger/features/personalization/profiles/controller/edit_profile_controller.dart';
 
 class GProfileHeader extends StatelessWidget {
 

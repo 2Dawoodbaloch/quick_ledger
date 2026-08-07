@@ -184,4 +184,39 @@ class AuthenticationRepository extends GetxController {
       throw 'Something went wrong, Please try again';
     }
   }
+
+
+  // change password
+  Future<void> changePassword({
+  required String currentPassword,
+  required String newPassword,
+}) async {
+  try {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      throw "User not logged in";
+    }
+
+    // Re-authenticate user
+    final credential = EmailAuthProvider.credential(
+      email: user.email!,
+      password: currentPassword,
+    );
+
+    await user.reauthenticateWithCredential(credential);
+
+    // Update password
+    await user.updatePassword(newPassword);
+
+  } on FirebaseAuthException catch (e) {
+    throw GFirebaseAuthException(e.code).message;
+  } on FirebaseException catch (e) {
+    throw GFirebaseException(e.code).message;
+  } on PlatformException catch (e) {
+    throw GPlatformException(e.code).message;
+  } catch (e) {
+    throw e.toString();
+  }
+}
 }

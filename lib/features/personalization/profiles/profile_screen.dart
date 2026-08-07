@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/route_manager.dart';
+import 'package:get/utils.dart';
 import 'package:quick_ledger/features/personalization/controllers/user_controller.dart';
 import 'package:quick_ledger/features/personalization/profiles/widgets/logout_button.dart';
 import 'package:quick_ledger/features/personalization/profiles/widgets/profile_action_tile.dart';
 import 'package:quick_ledger/features/personalization/profiles/widgets/profile_header.dart';
 import 'package:quick_ledger/features/personalization/profiles/widgets/profile_info_tile.dart';
+import 'package:quick_ledger/routes/routes_name.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -24,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
         //     child: CircularProgressIndicator(),
         //   );
         // }
-
+//
         return ListView(
           padding: const EdgeInsets.all(20),
 
@@ -44,19 +47,24 @@ class ProfileScreen extends StatelessWidget {
             GProfileActionTile(
               icon: Icons.edit,
               title: "Edit Profile",
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(RoutesName.editProfile);
+              },
             ),
-
             GProfileActionTile(
               icon: Icons.lock_outline,
               title: "Change Password",
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(RoutesName.changePassword);
+              },
             ),
 
             GProfileActionTile(
               icon: Icons.info_outline,
               title: "About",
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(RoutesName.aboutScreen);
+              },
             ),
 
             const SizedBox(height: 30),

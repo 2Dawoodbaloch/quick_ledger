@@ -17,6 +17,7 @@ import 'package:quick_ledger/features/ledger/screens/home/widget/recent_transact
 import 'package:quick_ledger/features/ledger/screens/home/widget/summary_row.dart';
 import 'package:quick_ledger/features/personalization/controllers/user_controller.dart';
 import 'package:quick_ledger/features/personalization/profiles/profile_screen.dart';
+import 'package:quick_ledger/routes/routes_name.dart';
 import 'package:quick_ledger/utils/constants/sizes.dart';
 import 'package:quick_ledger/utils/constants/text_strings.dart';
 
@@ -61,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                   userName: userController.user.value.name,
                   subtitle: GTexts.ledgerOverview,
                   onTap: () {
-                    Get.to(ProfileScreen());
+                    Get.toNamed(RoutesName.userProfile);
                   },
                 ),
               ),

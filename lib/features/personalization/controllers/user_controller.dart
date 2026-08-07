@@ -1,5 +1,7 @@
 //
 
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:quick_ledger/data/repositories/user/user_repository.dart';
@@ -46,9 +48,31 @@ class UserController extends GetxController {
     }
   }
 
-  //===========================================================
-  // FETCH USER
-  //===========================================================
+Future<void> updateUser(UserModel updatedUser) async {
+  try {
+
+
+    await _userRepository.updateUserRecord(updatedUser);
+
+
+
+    user.value = updatedUser;
+
+  
+
+    GSnackBarHelpers.successSnackBar(
+      title: "Success",
+      message: "Profile updated successfully",
+    );
+
+
+  } catch (e) {
+    log(e.toString());
+  }
+}
+
+
+// Fetch User
 
   Future<void> fetchUserRecord() async {
     try {

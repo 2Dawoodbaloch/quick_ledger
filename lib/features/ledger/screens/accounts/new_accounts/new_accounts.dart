@@ -121,7 +121,7 @@ class NewAccountScreen extends StatelessWidget {
                 width: double.infinity,
                 child: GElevatedButton(
                   onPressed: controller.createAccount,
-                  // onPressed: controller.canCreate ? controller.createAccount : null,
+               
                   child: Text(GTexts.createAccount),
                 ),
               ),

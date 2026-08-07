@@ -64,4 +64,24 @@ class UserRepository extends GetxController {
       throw 'Something went wrong, Please try again';
     }
   }
+
+  // UPDATE USER PROFILE
+  Future<void> updateUserRecord(UserModel user) async {
+  try {
+    await _db
+        .collection(GKeys.userCollection)
+        .doc(user.id)
+        .update(user.toJson());
+  } on FirebaseAuthException catch (e) {
+    throw GFirebaseAuthException(e.code).message;
+  } on FirebaseException catch (e) {
+    throw GFirebaseException(e.code).message;
+  } on FormatException {
+    throw GFormatException();
+  } on PlatformException catch (e) {
+    throw GPlatformException(e.code).message;
+  } catch (e) {
+    throw 'Something went wrong, Please try again';
+  }
+}
 }

@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:quick_ledger/bindings/balance_sheet_binding.dart';
+import 'package:quick_ledger/bindings/change_password_binding.dart';
+import 'package:quick_ledger/bindings/edit_profile_binding.dart';
 import 'package:quick_ledger/bindings/general_ledger_binding.dart';
 import 'package:quick_ledger/bindings/login_binding.dart';
 import 'package:quick_ledger/bindings/navigation_binding.dart';
@@ -23,6 +25,9 @@ import 'package:quick_ledger/features/ledger/screens/reports/general_ledger/gene
 import 'package:quick_ledger/features/ledger/screens/reports/profit_loss/profit_loss_screen.dart';
 import 'package:quick_ledger/features/ledger/screens/reports/reports.dart';
 import 'package:quick_ledger/features/ledger/screens/reports/trial_balance/trial_balance.dart';
+import 'package:quick_ledger/features/personalization/profiles/about_screen/about_screen.dart';
+import 'package:quick_ledger/features/personalization/profiles/change_password/change_password_screen.dart';
+import 'package:quick_ledger/features/personalization/profiles/edit_profile/edit_profile_screen.dart';
 import 'package:quick_ledger/features/personalization/profiles/profile_screen.dart';
 import 'package:quick_ledger/routes/routes_name.dart';
 
@@ -63,7 +68,7 @@ GetPage(
     GetPage(
       name: RoutesName.newAccounts,
       page: () {
-        log("PAGE BUILDER EXECUTED");
+      
         return NewAccountScreen();
       },
       binding: NewAccountBinding(),
@@ -86,6 +91,17 @@ GetPage(
     //Trial balance
     GetPage(name: RoutesName.trialBalance, page: () => TrialBalanceScreen(),binding: TrialBalanceBinding()),
      GetPage(name: RoutesName.balanceSheet, page: () => BalanceSheetScreen(),binding: BalanceSheetBinding()),
-     GetPage(name: RoutesName.profitLoss, page: () => ProfitLossScreen(),binding: ProfitLossBinding())
+     GetPage(name: RoutesName.profitLoss, page: () => ProfitLossScreen(),binding: ProfitLossBinding()),
+     GetPage(name: RoutesName.editProfile, page: () => EditProfileScreen(),binding: EditProfileBinding()),
+     GetPage(
+  name: RoutesName.changePassword,
+  page: () =>  ChangePasswordScreen(),
+  binding: ChangePasswordBinding(),
+),
+
+GetPage(
+  name: RoutesName.aboutScreen,
+  page: () => const AboutScreen(),
+),
   ];
 }

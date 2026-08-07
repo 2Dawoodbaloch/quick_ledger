@@ -1,6 +1,5 @@
 class RoutesName {
   RoutesName._(); // prevents instantiation — pure constants holder
-  static const String userProfile = "/user-profile";
   static const String login = "/login";
   static const String signup = "/signup";
   static const String navigationMenu = "/navigation-menu";
@@ -14,6 +13,11 @@ class RoutesName {
   static const String generalLedgerDetailScreen = "/general-ledger-detail";
   static const String trialBalance = "/trial-balance";
   static const String profitLoss =
-      "/profit-loss"; // was "/profit-balance-screen" — wrong name entirely
+      "/profit-loss"; 
+      static const String editProfile = "/edit-profile";
+        static const String userProfile = "/user-profile";
+        static const String changePassword = "/change-password-screen";
+ 
+    static const String aboutScreen = "/about-screen";
   static const String balanceSheet = "/balance-sheet";
 }
